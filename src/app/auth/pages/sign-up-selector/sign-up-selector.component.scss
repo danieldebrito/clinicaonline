@@ -1,0 +1,27 @@
+.container {
+    margin-top: 100px;
+    margin-bottom: 80px;
+}
+
+.image-wrapper {
+    max-width: 40%;
+    border-radius: 90%; /* Ajusta este valor según el grado de redondez deseado */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center; /* Centra la imagen y el título horizontalmente */
+    margin-right: 20px; /* Ajusta este valor para controlar la separación entre las imágenes */
+    transition: transform 0.3s; /* Agregado para animar la transformación */
+}
+
+.image-wrapper:hover {
+    transform: scale(1.05); /* Ajusta este valor según el efecto deseado */
+}
+
+img {
+    width: 100%;
+    height: auto;
+    border-radius: inherit; /* Hereda el radio de las esquinas del contenedor */
+}
+
+.image-title {
+    margin-top: 10px;
+}

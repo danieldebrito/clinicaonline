@@ -1,0 +1,82 @@
+<div class="all">
+    <div class="container h-70">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card">
+
+                <div class="d-flex justify-content-center">
+                    <div class="brand_logo_container">
+                        <img src="assets/logo/iso_cele.png" class="brand_logo" alt="Logo">
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-center form_container">
+                    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+                        <div class="input-group mb-3 mt-2">
+                            <label class="visually-hidden" for="autoSizingInputGroup">e-mail</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fa fa-user"></i></div>
+                                <input type="text" class="form-control" value="" formControlName="email"
+                                    (click)="errorFalse()" placeholder="email" />
+                            </div>
+                        </div>
+
+                        <div *ngIf="mostrarPass">
+                            <div class="input-group mb-2">
+                                <label class="visually-hidden" for="autoSizingInputGroup">Contraseña</label>
+                                <div class="input-group">
+                                    <div class="input-group-text"><i class="fa fa-key"></i></div>
+                                    <input type="text" class="form-control" formControlName="password"
+                                        (click)="errorFalse()" placeholder="contraseña" />
+                                </div>
+                            </div>
+
+                            <a class=" pass ml-2" (click)="verOcultarPass()"> <i class="fa fa-eye-slash"></i> &nbsp;
+                                Ocultar
+                                Contraseña</a>
+                        </div>
+
+                        <div *ngIf="!mostrarPass">
+
+                            <div class="input-group mb-2">
+                                <label class="visually-hidden" for="autoSizingInputGroup">Contraseña</label>
+                                <div class="input-group">
+                                    <div class="input-group-text"><i class="fa fa-key"></i></div>
+                                    <input type="password" class="form-control" formControlName="password"
+                                        (click)="errorFalse()" placeholder="contraseña" />
+                                </div>
+                            </div>
+
+                            <a class=" pass ml-2" (click)="verOcultarPass()"> <i class="fa fa-eye"></i> &nbsp;
+                                Ver Contraseña</a>
+                        </div>
+
+
+                        <div class="alert alert-danger" role="alert" *ngIf="error">
+                            Usuario o Contraseña Incorrecta
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <button class="btn login_btn" [disabled]="!loginForm.valid">Ingresá</button>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <button class="btn login_btn" (click)="AutoSignIn()">Acceso Rapido</button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="m-4">
+                    <div class="d-flex justify-content-center links">
+                        ¿No tenés cuenta? <a [routerLink]="'/registro'" class="ml-2"> Registrate</a>
+                    </div>
+                    <div class="d-flex justify-content-center links">
+                        <a [routerLink]="['/forgot-password']">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

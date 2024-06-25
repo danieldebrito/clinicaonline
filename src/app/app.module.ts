@@ -1,18 +1,48 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { LayoutModule } from './layout/layout.module';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { environment } from '../environments/environment.prod';
+import { AngularFireModule } from '@angular/fire/compat';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LayoutModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withFetch()),
+    provideClientHydration(),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideDatabase(() => getDatabase()),
+    provideStorage(() => getStorage()),
+    provideAnimationsAsync(),
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
