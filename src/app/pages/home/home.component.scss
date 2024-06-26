@@ -1,0 +1,96 @@
+/* jumbotron.scss */
+
+.jumbotron {
+    //background-color: var(--color-verde);
+    text-align: center;
+    padding: 50px 0;
+    margin-top: 2rem;
+    border-radius: 10px;
+    color: #25857d;
+  }
+  
+  .jumbotron h1 {
+    font-size: 4rem;
+    font-weight: bold;
+  }
+  
+  .jumbotron p.lead {
+    font-size: 1.5rem;
+  }
+  
+  .jumbotron .img-fluid {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 3px solid #fff;
+  }
+  
+  /* informacion.scss */
+  
+  .informacion {
+    padding: 50px 0;
+  }
+  
+  .info-box {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .info-box i {
+    font-size: 4rem;
+    color: #007bff;
+  }
+  
+  .info-box h3 {
+    margin-top: 20px;
+    font-size: 1.5rem;
+  }
+  
+  .info-image img {
+    width: 100px;
+    height: 100px;
+    border: 3px solid #25857d;
+    border-radius: 50%;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* horario.scss */
+  
+  .horario {
+    padding: 50px 0;
+    text-align: center;
+    //background-color: #d4cdad;
+    color: #d0fff6;
+    border-radius: 10px;
+  }
+  
+  .horario h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #d0fff6;
+  }
+  
+  .horario ul {
+    list-style: none;
+    padding: 0;
+    color: #d0fff6;
+  }
+  
+  .horario li {
+    margin-bottom: 10px;
+  }
+
+  .logo {
+    width: 100%;
+    height: auto;
+  }
+
+  @font-face {
+    font-family: 'VariableFont_wght';
+    src: url('./../../../assets/fonts/Urbanist/Urbanist-VariableFont_wght.ttf') format('truetype');
+  }
+
+  
+  .VariableFont_wght {
+    font-family: 'VariableFont_wght';
+  }
+  

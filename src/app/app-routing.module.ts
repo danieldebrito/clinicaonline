@@ -15,6 +15,8 @@ const routes: Routes = [
   { path: 'signup-paciente', loadChildren: () => import('./auth/pages/sign-up-paciente/sign-up.module').then(m => m.SignUpModule) },
   { path: 'signup-especialista', loadChildren: () => import('./auth/pages/sign-up-especialista/sign-up-especialista.module').then(m => m.SignUpEspecialistaModule) },
   { path: 'signup-selector', loadChildren: () => import('./auth/pages/sign-up-selector/sign-up-selector.module').then(m => m.SignUpSelectorModule) },
+    // pages ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
 ];
 
 @NgModule({

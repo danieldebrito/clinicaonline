@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+$color-verde: #21ceab;
+$color-azul: #161b2f;
+$color-violeta: #384373;
+$color-blancoverde: #d0fff6;
+
+
+
+.bg-verde {
+    background-color: $color-verde;
+}
+
+.bg-azul {
+    background-color: #161b2f;
+}
+
+.bg-violeta {
+    background-color: #384373;
+}
+
+.bg-blancoverde {
+    background-color: $color-blancoverde;
+}
