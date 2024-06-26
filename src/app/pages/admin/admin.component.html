@@ -1,0 +1,10 @@
+<div id="mySidenav" class="sidenav mt-2">
+    <a href="javascript:void(0)" (click)="closeNav()">&#9776; Cerrar Menu</a>
+    <app-side-bar></app-side-bar>
+  </div>
+  
+  <span class="fs-5 fw-semibold" *ngIf="showButtonMenu" (click)="openNav()"><a>&#9776; Ver Menu</a></span>
+  
+  <div id="main">
+    <router-outlet></router-outlet>
+  </div>
