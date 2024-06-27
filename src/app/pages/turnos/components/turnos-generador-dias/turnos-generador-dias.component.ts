@@ -57,6 +57,8 @@ export class TurnosGeneradorDiasComponent {
       const today = this.getToday();
       today.setDate(today.getDate() + j);
 
+      console.log(today);
+
       // si el número de día coincide con el de la jornada, cargo horarios
       if (today.getDay() === parseInt(jornada.diaDeSemanaEnNumeros)) {
         for (let i = 0; i <= cant; i++) {

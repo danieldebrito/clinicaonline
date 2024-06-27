@@ -1,6 +1,6 @@
 <div class="card no-border-radius mt-3">
     <div class="card-body"  >
         <p class="card-text"> {{ turnoDia.diaNombre }} </p>
-        <p class="card-text"> {{ turnoDia.dia }} / {{ turnoDia.mes ?? '' + 1 }} / {{ turnoDia.year }} </p>
+        <p class="card-text"> {{ turnoDia.dia }} / {{ (turnoDia!.mes ?? 0) + 1  }} / {{ turnoDia.year }} </p>
     </div>
 </div>
