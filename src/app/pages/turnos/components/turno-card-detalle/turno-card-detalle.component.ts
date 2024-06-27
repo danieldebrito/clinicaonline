@@ -164,12 +164,12 @@ export class TurnoCardDetalleComponent {
 
         console.log(this.turno.calificacion);
 
-        this.turno.calificacion = calificacion;
+        this.turno.calificacion = calificacion ?? {};
         this.throwTurno.emit(this.turno);
 
         Swal.fire(
           'Calificación Enviada',
-          `Gracias por calificar la atención con ${calificacion.nota} estrellas. Comentario: ${calificacion.comentario}`,
+          `Gracias por calificar la atención con ${this.turno.calificacion.nota} estrellas. Comentario: ${this.turno.calificacion.comentario}`,
           'success'
         );
       }
