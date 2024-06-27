@@ -1,0 +1,64 @@
+<div class="container mt-3">
+  <p class="fs-3">Historia Clinica : </p>
+
+  <button type="button" class="btn btn-success" (click)="generatePDF()">Success</button>
+
+
+  <div class="row">
+    <div class="col-sm-3">
+      <app-paciente-card [paciente]="paciente"></app-paciente-card>
+    </div>
+    <div class="col-sm-9" *ngIf="paciente != undefined">{{ paciente | nombreApellidoPipe }} </div>
+    <!-- Inside your *ngFor loop in the template -->
+    <div class="col-sm-12" *ngFor="let turno of turnosPaciente">
+      <div class="card mt-3">
+        <div class="card-body">
+          <div *ngIf="turno.atencionPaciente">
+            <!-- Check if atencionPaciente is defined -->
+            <div class="row">
+              <div class="col-sm-5">
+                <app-especialista-card [especialista]="turno.especialista"></app-especialista-card>
+                <app-especialidades-card [especialidad]="turno.especialidad"></app-especialidades-card>
+              </div>
+
+              <div class="col-sm-7">
+                <div class="col">
+                  <p class="fs-4">Resultado de la Atención médica : </p>
+
+                  <ul class="list-group">
+                    <li>{{ getFormattedDate(turno.fecha) }}</li>
+
+                    <li *ngIf="turno.atencionPaciente.altura">
+                      <strong>Altura:</strong> {{ turno.atencionPaciente.altura }} cm
+                    </li>
+                    <li *ngIf="turno.atencionPaciente.peso">
+                      <strong>Peso:</strong> {{ turno.atencionPaciente.peso }} kg
+                    </li>
+                    <li *ngIf="turno.atencionPaciente.temperatura">
+                      <strong>Temperatura:</strong> {{ turno.atencionPaciente.temperatura }} ºC
+                    </li>
+                    <li *ngIf="turno.atencionPaciente.presion">
+                      <strong>Presion:</strong> {{ turno.atencionPaciente.presion }} mm Hg
+                    </li>
+                  </ul>
+                  <p>
+                    <strong> Reseña : </strong> <br>
+                    {{ turno.atencionPaciente.resena }}
+                  </p>
+
+                </div>
+                <div class="col" *ngFor="let item of turno.atencionPaciente.dinamicos">
+                  <strong>{{ item.dinamicoKey }}:</strong> {{ item.dinamicoValue }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!turno.atencionPaciente">
+            <p>No hay atención médica registrada para este turno.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

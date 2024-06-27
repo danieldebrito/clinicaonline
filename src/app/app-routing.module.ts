@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'especialidades', loadChildren: () => import('./pages/especialidades/especialidades.module').then(m => m.EspecialidadesModule), canActivate: [AdminGuard] },
   { path: 'atenderturno', loadChildren: () => import('./pages/especialistas/pages/atender-turno/atender-turno.module').then(m => m.AtenderTurnoModule) },
   { path: 'mispacientes', loadChildren: () => import('./pages/especialistas/pages/mis-pacientes/mis-pacientes.module').then(m => m.MisPacientesModule) },
-    //{ path: 'historiaclinica', loadChildren: () => import('./pages/historia-clinica/historia-clinica.module').then(m => m.HistoriaClinicaModule) },
+  { path: 'historiaclinica', loadChildren: () => import('./pages/historia-clinica/historia-clinica.module').then(m => m.HistoriaClinicaModule) },
 
 ];
 
