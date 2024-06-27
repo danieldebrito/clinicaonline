@@ -33,6 +33,7 @@ export class NavbarComponent {
         });
       } else {
         this.currentUser = { email: '', password: '' };
+        this.currentUser.role = ERole.publico;
       }
     });
   }
