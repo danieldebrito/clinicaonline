@@ -1,0 +1,13 @@
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ paciente?.photoURL }}" class="img-fluid card-img-top" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <p class="fs-4">{{ paciente | nombreApellidoPipe }}</p>
+          <p class="card-text"> {{ paciente?.email }} </p>
+        </div>
+      </div>
+    </div>
+  </div>

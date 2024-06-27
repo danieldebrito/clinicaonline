@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+
+    <div *ngIf="isLoading; else turnosGrid" class="text-center mt-3">
+
+      <div class="container">
+        <div class="row justify-content-center align-items-center minh-100">
+          <div class="col-lg-12">
+              <div style="font-size: 24px;" class="text-center">
+                <div class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <ng-template #turnosGrid>
+      <div class="col-sm-12">
+        <app-turnos-grid [turnos]="turnos" [currentUser]="currentUser"
+          (thowTurno)="turnoUpdate($event)"></app-turnos-grid>
+      </div>
+    </ng-template>
+
+  </div>
+</div>

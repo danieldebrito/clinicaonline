@@ -1,0 +1,75 @@
+<div [appTurnoCancelado]="turno" class="card mt-3" style="width: 18rem;">
+    <div class="card-header">{{ turno.especialidad?.nombre }}</div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            Fecha: {{ getFormattedDate() | date:'yyyy-MM-dd HH:mm:ss' }}
+            <span [class]="getBadgeClass()"> {{turno.estado}} </span>
+        </li>
+        <li class="list-group-item">Especialista: {{ turno?.especialista | tituloMedicoSexo }} {{ turno?.especialista |
+            nombreApellidoPipe }}
+        </li>
+        <li class="list-group-item">Paciente: {{ turno?.paciente | nombreApellidoPipe }} </li>
+        <li class="list-group-item">Especialidad: {{ turno?.especialidad.nombre }}</li>
+
+        <!-- //////////////////////////   BOTONERA ESPECIALISTA ////////////////////////////////// -->
+        <li class="list-group-item" *ngIf="currentUser.role == 'especialista'">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <div *ngIf="turno.estado === 'pendiente'">
+                    <button type="button" class="btn btn-danger btn-sm mr-2"
+                        (click)="alertaConfirmacion()">Cancelar</button>
+                    <button type="button" class="btn btn-success btn-sm mr-2"
+                        (click)="cambiarEstadoTurno('aceptado')">Aceptar</button>
+                </div>
+
+                <div *ngIf="turno.estado === 'aceptado'">
+                    <button type="button" class="btn btn-danger btn-sm mr-2"
+                        (click)="alertaConfirmacion()">Cancelar</button>
+                    <button type="button" class="btn btn-primary btn-sm mr-2"
+                        (click)="atenderTurno(turno)">Atender</button>
+                </div>
+
+                <div *ngIf="turno.estado === 'cumplido'">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="verHistoriaClinica(turno)">Ver
+                        Historia Clinica</button>
+                </div>
+            </div>
+        </li>
+
+        <!-- //////////////////////////   BOTONERA PACIENTE ////////////////////////////////// -->
+        <li class="list-group-item" *ngIf="currentUser.role == 'paciente'">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <div *ngIf="turno.estado === 'pendiente'">
+                    <button type="button" class="btn btn-danger btn-sm mr-2"
+                        (click)="alertaConfirmacion()">Cancelar</button>
+                </div>
+
+                <div *ngIf="turno.estado === 'aceptado'">
+                    <button type="button" class="btn btn-danger btn-sm mr-2"
+                        (click)="alertaConfirmacion()">Cancelar</button>
+                </div>
+
+                <div *ngIf="turno.estado === 'cumplido'">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="verHistoriaClinica(turno)">
+                        Historia Clinica</button>
+
+                    <div *ngIf="turno.calificacion">
+                        <small class="text-muted">Este turno ya ha sido calificado.</small>
+                    </div>
+                    <!-- Ocultar botón si el turno está calificado -->
+                    <button *ngIf="!turno.calificacion" type="button" class="btn btn-primary btn-sm"
+                        (click)="alertaConfirmacionCalificacion()">
+                        Calificar Atención
+                    </button>
+
+                </div>
+            </div>
+
+            <!--
+            <app-app-star-rating [maxRating]="5" (ratingClicked)="handleRating($event)"></app-app-star-rating>
+            -->
+
+        </li>
+
+
+    </ul>
+</div>

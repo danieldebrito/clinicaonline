@@ -1,0 +1,5 @@
+<div class="row row-cols-1 row-cols-md-3 g-4" >
+    <div class="col" *ngFor="let item of especialistas">
+        <app-especialista-card [especialista]="item" (click)="lanzarEspecialista(item)"></app-especialista-card>
+    </div>
+</div>

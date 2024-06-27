@@ -10,7 +10,7 @@ const routes: Routes = [
       { path: 'usuarios', loadChildren: () => import('./pages/usuarios/usuarios.module').then(m => m.UsuariosModule) },
       { path: 'especialidades', loadChildren: () => import('./../especialidades/especialidades.module').then(m => m.EspecialidadesModule) },
       { path: 'logs', loadChildren: () => import('./pages/logs/logs.module').then(m => m.LogsModule) },
-      { path: 'altaadmin', loadChildren: () => import('./../../auth/pages/sign-up-paciente/sign-up.module').then(m => m.SignUpModule) },
+      { path: 'altaadmin', loadChildren: () => import('./../../auth/pages/sign-up-especialista/sign-up-especialista.module').then(m => m.SignUpEspecialistaModule) },
     ],
   },
   // { path: 'archivos', component: ArchivosComponent },

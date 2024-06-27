@@ -1,0 +1,24 @@
+<!-- app-turno-detalle.component.html -->
+<div *ngIf="turno">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="mt-3">
+                <app-especialista-card *ngIf="turno.especialista"
+                    [especialista]="turno.especialista"></app-especialista-card>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="mt-3">
+                <app-especialidades-card [especialidad]="turno.especialidad ?? ''"></app-especialidades-card>
+            </div>
+            <div class="mt-3">
+                <app-turno-card [turno]="turno"></app-turno-card>
+            </div>
+
+            <div class="mt-5">
+                <button type="button" class="btn btn-success" (click)="lanzaTurno()">Aceptar Turno</button>
+            </div>
+        </div>
+    </div>
+</div>

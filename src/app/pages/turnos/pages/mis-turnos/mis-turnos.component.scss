@@ -1,0 +1,13 @@
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(175, 170, 170, 0.8);
+  z-index: 1000;
+}
+
+.minh-100 {
+  min-height: 70vh;
+}

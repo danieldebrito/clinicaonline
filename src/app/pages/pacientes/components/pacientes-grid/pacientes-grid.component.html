@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-sm-2" *ngFor="let item of pacientes">
+        <div class="row row-cols-1 row-cols-md-1 g-4">
+            <div class="col">
+                <app-paciente-card [paciente]="item" ></app-paciente-card>
+            </div>
+        </div>
+    </div>
+</div>
+

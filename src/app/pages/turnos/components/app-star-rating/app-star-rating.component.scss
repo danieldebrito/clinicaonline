@@ -1,0 +1,9 @@
+/* app-star-rating.component.scss */
+.star {
+    color: gray;
+    cursor: pointer;
+  }
+  
+  .star.selected {
+    color: gold;
+  }

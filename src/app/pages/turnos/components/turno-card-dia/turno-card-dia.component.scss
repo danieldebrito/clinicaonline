@@ -1,0 +1,25 @@
+.card {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    transform: scale(1.1);
+}
+
+
+.card {
+    width: 150px; /* Ajusta el ancho según tus necesidades */
+    height: 150px; /* Ajusta la altura para que sea igual al ancho */
+    /*border-radius: 10px; /* Opcional: Agrega bordes redondeados si lo deseas */
+    overflow: hidden; /* Asegura que el contenido no sobresalga */
+}
+
+.card-body {
+    height: 100%; /* Ajusta la altura del cuerpo para llenar la tarjeta */
+}
+
+.card.no-border-radius {
+    border-radius: 0; /* Anula el borde redondeado de la clase .card de Bootstrap */
+}

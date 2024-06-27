@@ -1,0 +1,23 @@
+<div class="row container">
+
+    <div class="col-sm-6">
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="inputPassword6" class="col-form-label">Buscador</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline"
+                    [(ngModel)]="filtroPalabra" (keyup)="aplicarFiltro()">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col" *ngFor="let item of turnos">
+                <app-turno-card-detalle [turno]="item" [currentUser]="currentUser" (throwTurno)="lanzarTurno($event)"></app-turno-card-detalle>
+            </div>
+        </div>
+    </div>
+    
+</div>

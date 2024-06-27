@@ -1,0 +1,34 @@
+<div class="mt-2">
+
+    <form>
+        <div class="row">
+            <!--            <div class="col-sm-2">
+                <input class="form-control" name="diaDeSemanaEnNumeros" [(ngModel)]="jornada.diaDeSemanaEnNumeros" >
+            </div>
+        -->
+            <div class="col-sm-2">
+                <select class="form-control" name="diaDeSemanaEnNumeros" [value]="jornada.diaDeSemanaEnNumeros">
+                    <option value=1>Lunes</option>
+                    <option value=2>Martes</option>
+                    <option value=3>Miercoles</option>
+                    <option value=4>Jueves</option>
+                    <option value=5>Viernes</option>
+                    <option value=6>Sabado</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <input class="form-control" name="horaInicioJornada" [value]="jornada.horaInicioJornada">
+            </div>
+
+            <div class="col-sm-2">
+                <input class="form-control" name="horaFinJornada" [value]="jornada.horaFinJornada">
+            </div>
+            <div class="col-sm-3">
+                <input class="form-control" name="especialidadNombre" [value]="jornada.especialidad?.nombre">
+            </div>
+            <div class="col-sm-2 ">
+                <input class="form-control" type="number" name="duracionTurno" [value]="jornada.duracionTurno">
+            </div>
+        </div>
+    </form>
+</div>
