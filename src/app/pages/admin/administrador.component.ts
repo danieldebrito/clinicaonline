@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  selector: 'app-administrador',
+  templateUrl: './administrador.component.html',
+  styleUrls: ['./administrador.component.scss']
 })
-export class AdminComponent {
+export class AdministradorComponent {
 
   public showButtonMenu: boolean = true;
 

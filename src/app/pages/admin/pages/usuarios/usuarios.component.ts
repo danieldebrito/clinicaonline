@@ -5,20 +5,20 @@ import { Router } from '@angular/router';
 
 import * as XLSX from 'xlsx';
 // services ///////////////////////////////////////////////////////////////
-import { UsuariosService } from '../../../auth/services/usuarios.service';
-import { turnosService } from '../../../services/turnos.service';
+import { UsuariosService } from '../../../../auth/services/usuarios.service';
+import { turnosService } from '../../../../services/turnos.service';
 // class /////////////////////////////////////////////////////////////////
-import { Usuario } from '../../../auth/class/usuario';
-import { Paciente } from '../../../class/usuarios/paciente';
+import { Usuario } from '../../../../auth/class/usuario';
+import { Paciente } from '../../../../class/usuarios/paciente';
+
 
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
-  styleUrl: './usuarios.component.scss'
+  styleUrls: ['./usuarios.component.scss'],
 })
-export class UsuariosComponent {
-
-  public usuarios: any;
+export class UsuariosComponent implements OnInit {
+  public usuarios: Usuario[] = [];
 
   constructor(
     private usuariosSvc: UsuariosService,

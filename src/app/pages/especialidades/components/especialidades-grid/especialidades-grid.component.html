@@ -1,0 +1,16 @@
+<!-- especialidades-grid.component.html -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let item of especialidades">
+    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+      <div class="card-header" (click)="lanzarEspecialidad(item)">
+        <img [src]="item.photoURL" alt="" srcset="">
+      </div>
+    </div>
+    <p class="fs-4">{{ item.nombre }}</p>
+  </div>
+</div>
+
+
+<div *ngIf="!especialidades || especialidades.length === 0">
+  <p>No especialidades available.</p>
+</div>

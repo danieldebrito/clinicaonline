@@ -1,38 +1,40 @@
 <div class="flex-shrink-0 p-3" style="width: 380px">
-    <ul class="list-unstyled ps-0">
-        <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-                Especialidades
-            </button>
-            <div class="collapse" id="home-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li>
-                        <a routerLink="especialidades"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Nueva</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                Usuarios
-            </button>
-            <div class="collapse" id="dashboard-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li>
-                        <a routerLink="usuarios"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Usuarios Listado</a>
+  <ul class="list-unstyled ps-0">
+    <li class="mb-1">
+      <button
+        class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#home-collapse"
+        aria-expanded="false" >
+        Especialidades
+      </button>
+      
+      <div class="collapse" id="home-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li> <a routerLink="especialidades" class="link-body-emphasis d-inline-flex text-decoration-none rounded" > Nueva</a>  </li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      
+      <button
+        class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#dashboard-collapse"
+        aria-expanded="false"
+      >
+        Usuarios
+      </button>
 
-                    </li>
-                    <li>
-                        <a routerLink="logs"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Logs</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="border-top my-3"></li>
-    </ul>
+
+      <div class="collapse" id="dashboard-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li> <a routerLink="usuarios" class="link-body-emphasis d-inline-flex text-decoration-none rounded" >Listado</a > </li>
+            <li> <a routerLink="altaadmin" class="link-body-emphasis d-inline-flex text-decoration-none rounded" >Nuevo Admin</a > </li>
+          <li> <a routerLink="logs" class="link-body-emphasis d-inline-flex text-decoration-none rounded" >Logs</a > </li>
+        </ul>
+      </div>
+    </li>
+    <li class="border-top my-3"></li>
+  </ul>
 </div>

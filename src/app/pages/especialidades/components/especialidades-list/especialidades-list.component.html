@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="table-responsive">
+        <table class="table user-list">
+            <tbody *ngFor="let item of especialidades">
+                <tr>
+
+                      <app-especialidades-card (especialidadSeleccionada)="lanzarEspecialidad(item)" [especialidad]="item" ></app-especialidades-card>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

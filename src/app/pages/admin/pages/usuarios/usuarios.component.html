@@ -8,19 +8,27 @@
         <table class="table user-list">
             <thead>
                 <tr>
+                    <th><span>Avatar</span></th>
                     <th><span>User</span></th>
                     <th><span> Rol </span></th>
                     <th><span>Nacimiento</span></th>
                     <th class="text-center"><span>Email</span></th>
-                    <th><span>Email Vericado ?</span></th>
-                    <th><span>Estado</span></th>
+                    <th><span>Email Estado</span></th>
+                    <th><span>Usuario Estado</span></th>
                     <th><span>Habilitar</span></th>
                     <th><span>Borrar</span></th>
+                    <!--
                     <th><span>H.Clinica</span></th>
+                    -->
                 </tr>
             </thead>
             <tbody *ngFor="let item of usuarios">
                 <tr>
+                    <td>
+                        <div class="image-container">
+                            <img src="{{ item.photoURL }}" alt="Imagen redonda con sombra">
+                        </div>
+                    </td>
                     <td>
                         <div class="fs-6">
                             <span class="label label-default">
@@ -76,6 +84,7 @@
                             </span>
                         </a>
                     </td>
+                    <!--
                     <td>
                         <a (click)="verHistoriaClinica(item)" class="table-link danger">
                             <span class="fa-stack">
@@ -84,6 +93,7 @@
                             </span>
                         </a>
                     </td>
+                    -->
                 </tr>
             </tbody>
         </table>

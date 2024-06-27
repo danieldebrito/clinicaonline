@@ -17,8 +17,7 @@ const routes: Routes = [
   { path: 'signup-selector', loadChildren: () => import('./auth/pages/sign-up-selector/sign-up-selector.module').then(m => m.SignUpSelectorModule) },
     // pages ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
-  { path: 'administrador', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
-  { path: 'usuarios', loadChildren: () => import('./pages/admin/usuarios/usuarios.module').then(m => m.UsuariosModule) },
+  { path: 'administrador', loadChildren: () => import('./pages/admin/administrador.module').then(m => m.AdministradorModule) },
 ];
 
 @NgModule({
