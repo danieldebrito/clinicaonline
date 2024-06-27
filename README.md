@@ -1,27 +1,100 @@
-# Clinicaonline
+# CLINICA ON LINE 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
+## Descripción
 
-## Development server
+Trabajo practico final para la materia Laboratorio de Computacion 4 - UTN Facultad Regional Avellaneda 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Consigna
 
-## Code scaffolding
+El TP se comenzará durante la cursada y el sistema de corrección será por sprints, que tendrán tanto
+funcionalidades del sistema como requerimientos mínimos de aprobación.
+La entrega del TP estará compuesta por 4 sprint previo a la finalización de la cursada. Una vez
+finalizada la cursada, el mismo TP se deberá entregar en fecha de Final con el agregado que se
+solicitara para esas instancias.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Visuales
 
-## Build
+### HOME
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<image src="https://github.com/danieldebrito/clinicaonline/blob/master/src/assets/caps/home.png" alt="Descripción de la imagen">
+  
+### LOGIN
 
-## Running unit tests
+<image src="https://github.com/danieldebrito/clinicaonline/blob/master/src/assets/caps/login.png" alt="Descripción de la imagen">
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### ALTA DE USUARIOS
 
-## Running end-to-end tests
+<image src="https://github.com/danieldebrito/clinicaonline/blob/master/src/assets/caps/altausr.png" alt="Descripción de la imagen">
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+### TURNOS
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<image src="https://github.com/danieldebrito/clinicaonline/blob/master/src/assets/caps/turnos1.png" alt="Descripción de la imagen">
+<image src="https://github.com/danieldebrito/clinicaonline/blob/master/src/assets/caps/turnos2.png" alt="Descripción de la imagen">
+<image src="https://github.com/danieldebrito/clinicaonline/blob/master/src/assets/caps/turnos3.png" alt="Descripción de la imagen">
+<image src="https://github.com/danieldebrito/clinicaonline/blob/master/src/assets/caps/turnos4.png" alt="Descripción de la imagen">
+<image src="https://github.com/danieldebrito/clinicaonline/blob/master/src/assets/caps/turnos5.png" alt="Descripción de la imagen">
+
+### ADMINISTRACION DE USUARIOS
+
+<image src="https://github.com/danieldebrito/clinicaonline/blob/master/src/assets/caps/panelusuarios.png" alt="Descripción de la imagen">
+
+### LOGS DE USUARIOS
+
+<image src="https://github.com/danieldebrito/clinicaonline/blob/master/src/assets/caps/logs.png" alt="Descripción de la imagen">
+
+
+## Empezando 🚀
+
+
+### Entorno de desarrollo 📋
+
+- Sistema Operativo: win32 x64
+- Package Manager: npm 10.7.0
+- Node.js: v20.12.2
+- Lenguaje de programación: Typescript
+- Framework: Angular 18
+- Base de datos: Firebase 8
+- Otros:
+- Package                         Version
+- ---------------------------------------------------------
+- @angular-devkit/architect       0.1703.8
+- @angular-devkit/build-angular   17.3.8
+- @angular-devkit/core            17.3.8
+- @angular-devkit/schematics      17.3.8
+- @angular/cdk                    17.3.10
+- @angular/cli                    17.3.8
+- @angular/fire                   17.1.0
+- @angular/material               17.3.10
+- @schematics/angular             17.3.8
+- rxjs                            7.8.1
+- typescript                      5.4.5
+- zone.js                         0.14.7
+
+### Instalación 🔧
+
+```bash
+# npm install
+```
+
+## Autores ✒️
+
+- **Daniel de Brito ** - _Trabajo inicial_ - [Daniel de Brito](https://github.com/danieldebrito)
+
+## Licencia 📄
+
+Este proyecto está bajo la Licencia GPL
+
+## Expresiones de Gratitud 🎁
+
+Estamos agradecidos por las contribuciones de la comunidad a este proyecto. 
+Si encontraste cualquier valor en este proyecto o quieres contribuir, aquí está lo que puedes hacer:
+
+- Comparte este proyecto con otros
+- Invítanos un café ☕
+- Inicia un nuevo problema o contribuye con un PR
+- Muestra tu agradecimiento diciendo gracias en un nuevo problema.
+
+---
+
+⌨️ con ❤️ por [Daniel de Brito](https://github.com/danieldebrito) 😊
