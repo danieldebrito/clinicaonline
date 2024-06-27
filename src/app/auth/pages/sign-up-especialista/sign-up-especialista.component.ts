@@ -24,8 +24,7 @@ export class SignUpEspecialistaComponent {
   public mostrarPass = false;
   public role: ERole = ERole.especialista;
 
-  public userEmail: string = '';
-  public userPwd: string = '';
+  public usrAlta = {};
 
   createForm = new FormGroup({
     //uid: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -94,11 +93,15 @@ export class SignUpEspecialistaComponent {
         habilitado: false,
       };
 
-      this.authService.SignUp(newEspecialista);
+      this.usrAlta = newEspecialista;
 
+      //this.authService.SignUp(newEspecialista);
 
-      console.log(newEspecialista);
-      //this.usuariosService.addItem(newEspecialista);
+      if (this.captchaResultado) {
+        console.log('ALTA' + newEspecialista);
+        //this.usuariosService.addItem(newEspecialista);
+      }
+
 
     } else {
       console.log("El formulario no es válido, realiza alguna acción o muestra un mensaje de error.");
@@ -107,9 +110,12 @@ export class SignUpEspecialistaComponent {
   }
 
 
-/////////////////////////////////  CAPTCHA ///////////////////////////////////////////////////////////////////
+  /////////////////////////////////  CAPTCHA ///////////////////////////////////////////////////////////////////
   public onCaptchaVerified(isVerified: boolean) {
     if (isVerified) {
+
+      this.authService.SignUp(this.usrAlta);
+
       console.log('Captcha verificado correctamente');
       this.captchaResultado = true;
     } else {
@@ -126,7 +132,7 @@ export class SignUpEspecialistaComponent {
     if (!valorActual) {
       console.log('El checkbox ha sido desactivado');
       this.captchaHabilitado = false;
-    } else  {
+    } else {
       console.log('El checkbox ha sido activado');
       this.captchaHabilitado = true;
     }

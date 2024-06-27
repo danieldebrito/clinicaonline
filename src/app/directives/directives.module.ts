@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { MyCatchaDirective } from './my-captcha.directive';
 import { HoverCardDirective } from './hover-card.directive';
 import { TurnoCanceladoBackGroundDirective } from './turno-cancelado-back-ground.directive';
+import { MyCatchaSumaDirective } from './my-captcha-suma.directive';
 
 @NgModule({
   declarations: [
     MyCatchaDirective,
     HoverCardDirective,
+    MyCatchaSumaDirective,
     TurnoCanceladoBackGroundDirective
   ],
   imports: [
@@ -15,6 +17,7 @@ import { TurnoCanceladoBackGroundDirective } from './turno-cancelado-back-ground
   ],
   exports: [
     MyCatchaDirective,
+    MyCatchaSumaDirective,
     HoverCardDirective,
     TurnoCanceladoBackGroundDirective
   ]
