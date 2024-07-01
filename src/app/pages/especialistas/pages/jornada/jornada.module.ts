@@ -5,7 +5,8 @@ import { JornadaRoutingModule } from './jornada-routing.module';
 import { JornadaComponent } from './jornada.component';
 import { EspecialidadesModule } from '../../../especialidades/especialidades.module';
 import { JornadaItemComponent } from './components/jornada-item/jornada-item.component';
-EspecialidadesModule
+import { EspecialistaComponentsModule } from '../../components/especialista-components.module';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +18,11 @@ EspecialidadesModule
     JornadaRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    EspecialidadesModule
+    EspecialidadesModule,
+    EspecialistaComponentsModule
+  ],
+  exports: [
+    JornadaComponent
   ]
 })
 export class JornadaModule { }

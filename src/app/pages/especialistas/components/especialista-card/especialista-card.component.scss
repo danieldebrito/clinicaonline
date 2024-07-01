@@ -7,3 +7,10 @@
     box-shadow: 5px 6px 6px 2px #e9ecef;
     transform: scale(1.1);
 }
+
+.card-img-top {
+    width: auto;
+    height: 150px;
+    object-fit: cover; /* Ajusta la imagen para que cubra completamente el espacio */
+    border-radius: 0.25rem; /* Añade bordes redondeados */
+}

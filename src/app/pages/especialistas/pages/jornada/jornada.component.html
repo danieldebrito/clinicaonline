@@ -1,5 +1,10 @@
 <div class="container">
 
+<div class="col-sm-12">
+  <app-especialista-ficha [especialista]="especialista"></app-especialista-ficha>
+</div>
+
+
   <div class="section-title mt-2">
     <h2>Jornadas</h2>
   </div>
@@ -18,38 +23,38 @@
       <label name="select" class="form-label">Especialidad</label>
     </div>
     <div class="col-sm-2 ">
-      <label name="select" class="form-label">Duracion Turno</label>
+      <label name="select" class="form-label">Duración Turno</label>
     </div>
-
   </div>
 
   <div *ngFor="let item of jornadas">
     <app-jornada-item [jornada]="item"></app-jornada-item>
   </div>
 
-
   <form [formGroup]="formulario" (ngSubmit)="addJornada()">
     <div class="row">
       <div class="mt-2 col-sm-2">
         <select class="form-control" (change)="enviarItem()" id="diaDeSemanaEnNumeros"
           formControlName="diaDeSemanaEnNumeros">
-          <option value=1 selected>Lunes</option>
+          <option value=1>Lunes</option>
           <option value=2>Martes</option>
-          <option value=3>Miercoles</option>
+          <option value=3>Miércoles</option>
           <option value=4>Jueves</option>
           <option value=5>Viernes</option>
-          <option value=6>Sabado</option>
+          <option value=6>Sábado</option>
         </select>
-
         <small class="invalid"
           *ngIf="formulario.controls.diaDeSemanaEnNumeros.errors?.['required'] && formulario.controls.diaDeSemanaEnNumeros.touched">
           El Día de la Semana es Requerido
         </small>
-
+        <small class="invalid" *ngIf="errorDiaRepetido">
+          Este día ya está seleccionado. Por favor, elija otro día.
+        </small>
       </div>
+
       <div class="mt-2 col-sm-2">
         <select class="form-control" (change)="enviarItem()" id="horaInicioJornada" formControlName="horaInicioJornada">
-          <option value=8 selected>08:00 hs</option>
+          <option value=8>08:00</option>
           <option value=9>09:00</option>
           <option value=10>10:00</option>
           <option value=11>11:00</option>
@@ -62,16 +67,15 @@
           <option value=18>18:00</option>
           <option value=19>19:00</option>
         </select>
-
         <small class="invalid"
           *ngIf="formulario.controls.horaInicioJornada.errors?.['required'] && formulario.controls.horaInicioJornada.touched">
           El Horario de Entrada es Requerido.
         </small>
-
       </div>
+
       <div class="mt-2 col-sm-2">
         <select class="form-control" (change)="enviarItem()" id="horaFinJornada" formControlName="horaFinJornada">
-          <option value=8 selected>08:00</option>
+          <option value=8>08:00</option>
           <option value=9>09:00</option>
           <option value=10>10:00</option>
           <option value=11>11:00</option>
@@ -84,7 +88,6 @@
           <option value=18>18:00</option>
           <option value=19>19:00</option>
         </select>
-
         <small class="invalid"
           *ngIf="formulario.controls.horaFinJornada.errors?.['required'] && formulario.controls.horaFinJornada.touched">
           El Horario de Salida es Requerido.
@@ -96,34 +99,30 @@
           (change)="onEspecialidadChange($event)">
           <option [value]="item.nombre" *ngFor="let item of especialidades">{{ item.nombre }}</option>
         </select>
+        <small class="invalid"
+          *ngIf="formulario.controls.especialidad.errors?.['required'] && formulario.controls.especialidad.touched">
+          La Especialidad es Requerida.
+        </small>
       </div>
 
-
-
-
-
-      <!-- Campo duracionTurno -->
       <div class="mt-2 col-sm-2 ">
         <input class="form-control" type="number" id="duracionTurno" formControlName="duracionTurno" required
           minlength="3">
-        <div class="red"
-          *ngIf="formulario.get('duracionTurno')?.touched && formulario.get('duracionTurno')?.errors?.['required']">
-          El campo duracionTurno es requerido.</div>
-        <div class="red"
-          *ngIf="formulario.get('duracionTurno')?.touched && formulario.get('duracionTurno')?.errors?.['minlength']">
-          El campo duracionTurno debe tener al menos 6
-          caracteres.</div>
+        <small class="invalid"
+          *ngIf="formulario.controls.duracionTurno.errors?.['required'] && formulario.controls.duracionTurno.touched">
+          El campo Duración del Turno es requerido.
+        </small>
+        <small class="invalid"
+          *ngIf="formulario.controls.duracionTurno.errors?.['minlength'] && formulario.controls.duracionTurno.touched">
+          El campo Duración del Turno debe tener al menos 3 caracteres.
+        </small>
       </div>
 
       <div class="mt-2 col-sm-1">
-        <!-- Campo dni -->
         <div>
-          <button type="submit" class="btn btn-success">Guardar</button>
+          <button type="submit" class="btn btn-success" [disabled]="formulario.invalid">Guardar</button>
         </div>
       </div>
     </div>
   </form>
-
-
-
 </div>

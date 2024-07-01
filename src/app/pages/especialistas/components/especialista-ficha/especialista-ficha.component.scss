@@ -1,0 +1,26 @@
+.container {
+    margin-top: 20px;
+  }
+  
+  .displayTable {
+    display: table;
+    width: 100%;
+  }
+  
+  .displayTableCell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  .authBlock {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  

@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Especialidad } from '../../../../class/especialidad';
 import { Jornada } from '../../../../class/jornada';
 import { EspecialidadesService } from '../../../../services/especialidades.service';
 import { JornadasService } from '../../../../services/jornadas.service';
+import { Especialista } from '../../../../class/usuarios/especialista';
+import { UsuariosService } from '../../../../auth/services/usuarios.service';
 
 @Component({
   selector: 'app-jornada',
@@ -12,43 +14,43 @@ import { JornadasService } from '../../../../services/jornadas.service';
   styleUrls: ['./jornada.component.scss']
 })
 export class JornadaComponent implements OnInit {
-
   @Output() pasaItem = new EventEmitter();
 
   public userLoggedUID: string = '';
-
-
   public especialidades: Especialidad[] = [];
   public especialidad: any = {};
-
   public jornadas: Jornada[] = [];
-  //public jornada: Jornada = {};
+  public errorDiaRepetido: boolean = false;
+
+  public especialista: any = {};
 
   formulario = new FormGroup({
-    diaDeSemanaEnNumeros: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(60), Validators.pattern("^[0-9]*$")]),
-    horaInicioJornada: new FormControl(8, [Validators.required, Validators.min(1), Validators.max(60), Validators.pattern("^[0-9]*$")]),
-    horaFinJornada: new FormControl(19, [Validators.required, Validators.min(1), Validators.max(60), Validators.pattern("^[0-9]*$")]),
-    duracionTurno: new FormControl(19, [Validators.required, Validators.min(1), Validators.max(60), Validators.pattern("^[0-9]*$")]),
-    especialidad: new FormControl([], [Validators.required]),
+    diaDeSemanaEnNumeros: new FormControl(0, [Validators.required, this.uniqueDiaValidator.bind(this)]),
+    horaInicioJornada: new FormControl(8, [Validators.required, Validators.min(1), Validators.max(24)]),
+    horaFinJornada: new FormControl(19, [Validators.required, Validators.min(1), Validators.max(24)]),
+    duracionTurno: new FormControl(0, [Validators.required, Validators.min(1)]),
+    especialidad: new FormControl('', [Validators.required]),
   });
 
   constructor(
     private especialidadesSv: EspecialidadesService,
+    private usuariosSv: UsuariosService,
     private jornadasSv: JornadasService,
-    private afAuth: AngularFireAuth) { }
+    private afAuth: AngularFireAuth
+  ) { }
 
-  public resetFrom() {
+  public resetForm() {
     this.formulario.reset({
       diaDeSemanaEnNumeros: 0,
       horaInicioJornada: 8,
-      horaFinJornada: 19
+      horaFinJornada: 19,
+      duracionTurno: 0,
+      especialidad: ''
     });
   }
 
   public enviarItem() {
     this.pasaItem.emit({ itemEnviado: this.formulario.getRawValue() });
-    // alert(event.target.value);
-    // console.log(this.formulario.getRawValue());
   }
 
   public getEspecialidades() {
@@ -57,21 +59,22 @@ export class JornadaComponent implements OnInit {
     });
   }
 
-  // Maneja el cambio en el select
-onEspecialidadChange(event: any) {
-  // Obtén el objeto de especialidad seleccionado
-  this.especialidad = this.especialidades.find(
-    (item) => item.nombre?.toLowerCase() == event.target.value.toLowerCase()
-  );
-}
+  onEspecialidadChange(event: any) {
+    this.especialidad = this.especialidades.find(
+      (item) => item.nombre?.toLowerCase() == event.target.value.toLowerCase()
+    );
+  }
 
-  ///* jornadas//////////////////////////////////////////////////////////////////////////////////
   public addJornada() {
+    const diaSeleccionado = this.formulario.value.diaDeSemanaEnNumeros;
+    const diaRepetido = this.jornadas.some(jornada => jornada.diaDeSemanaEnNumeros === diaSeleccionado);
+
+    if (diaRepetido) {
+      this.errorDiaRepetido = true;
+      return;
+    }
 
     const newItem: Jornada = {
-      //id: this.createForm.value.id ?? '',
-      //emailVerified: this.createForm.value.emailVerified ?? '',
-
       diaDeSemanaEnNumeros: this.formulario.value.diaDeSemanaEnNumeros ?? 0,
       horaInicioJornada: this.formulario.value.horaInicioJornada ?? 0,
       horaFinJornada: this.formulario.value.horaFinJornada ?? 0,
@@ -81,14 +84,19 @@ onEspecialidadChange(event: any) {
     };
 
     console.log(newItem);
-
     this.jornadasSv.addItem(newItem);
+    this.errorDiaRepetido = false;  // Resetear el error si se guarda correctamente
+    this.resetForm();  // Resetear el formulario después de guardar
   }
-
 
   public getJornadas() {
     this.afAuth.authState.subscribe(user => {
       if (user) {
+
+        this.usuariosSv.getItemByUid(user.uid).subscribe( res => {
+          this.especialista = res;
+        });
+        
         this.jornadasSv.getItems().subscribe(res => {
           this.jornadas = res.filter(j => j.userUID == user.uid);
         });
@@ -96,12 +104,9 @@ onEspecialidadChange(event: any) {
         this.jornadas = [];
       }
     });
-
   }
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-
-  getLoggedUerUID() {
+  getLoggedUserUID() {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userLoggedUID = user.uid;
@@ -111,9 +116,18 @@ onEspecialidadChange(event: any) {
     });
   }
 
-  public ngOnInit(): void {
+  // Validación personalizada para asegurarse de que el día no se repita
+  uniqueDiaValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    if (this.jornadas && control.value) {
+      const diaRepetido = this.jornadas.some(jornada => jornada.diaDeSemanaEnNumeros === control.value);
+      return diaRepetido ? { 'diaRepetido': true } : null;
+    }
+    return null;
+  }
+
+  ngOnInit(): void {
     this.getEspecialidades();
     this.getJornadas();
-    this.getLoggedUerUID();
+    this.getLoggedUserUID();
   }
 }

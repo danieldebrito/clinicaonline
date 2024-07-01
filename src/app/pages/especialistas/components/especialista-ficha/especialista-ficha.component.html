@@ -1,0 +1,100 @@
+<div class="container mt-3">
+    <div class="displayTable">
+      <div class="displayTableCell">
+        <div class="authBlock">
+          <h3>Datos del Especialista</h3>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="p-2">
+                <div class="mt-2">
+                  <img [src]="especialista?.photoURL || 'assets/images/placeholder-user.png'" class="img-fluid" alt="No image">
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div>
+                    <label class="form-label">Email:</label>
+                    <p>{{ especialista?.email }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div>
+                    <label class="form-label">Nombre:</label>
+                    <p>{{ especialista?.nombre }}</p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-sm-6">
+                  <div>
+                    <label class="form-label">Apellido:</label>
+                    <p>{{ especialista?.apellido }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div>
+                    <label class="form-label">Display Name:</label>
+                    <p>{{ especialista?.displayName }}</p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-sm-6">
+                  <div>
+                    <label class="form-label">Sexo:</label>
+                    <p>{{ especialista?.sexo }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div>
+                    <label class="form-label">Edad:</label>
+                    <p>{{ especialista?.edad }}</p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-sm-6">
+                  <div>
+                    <label class="form-label">DNI:</label>
+                    <p>{{ especialista?.dni }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div>
+                    <label class="form-label">Fecha de Nacimiento:</label>
+                    <p>{{ especialista?.fechaNacimiento }}</p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-sm-6">
+                  <div>
+                    <label class="form-label">Rol:</label>
+                    <p>{{ especialista?.role }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div>
+                    <label class="form-label">Estado:</label>
+                    <p>{{ especialista?.habilitado ? 'Habilitado' : 'No habilitado' }}</p>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="mt-3">
+            <button (click)="volver()" class="btn btn-secondary">Volver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
