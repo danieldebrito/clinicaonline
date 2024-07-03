@@ -14,15 +14,13 @@ import { ERole, Usuario } from '../class/usuario';
 import { UsuariosService } from './usuarios.service';
 import Swal from 'sweetalert2';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-
   public currentUser: Usuario = {};
 
-  userData: any; // Save logged in user data
+  public userData: any = null; // Save logged in user data
   private _userLoggedOutSubject = new Subject<void>();
 
   constructor(
@@ -31,7 +29,7 @@ export class AuthService {
     public afsA: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -50,7 +48,7 @@ export class AuthService {
   get userLoggedOut$(): Observable<void> {
     return this._userLoggedOutSubject.asObservable();
   }
-  
+
   // Sign in with email/password
   SignIn(usuario: any) {
     return this.afAuth
@@ -58,7 +56,6 @@ export class AuthService {
       .then((result) => {
         this.SetUserData(result.user, usuario);
         this.afAuth.authState.subscribe((user) => {
-
           ////////////////  guardo el log ///////////////////////////////////
           if (user) {
             let log: UserLog = {
@@ -72,46 +69,61 @@ export class AuthService {
         });
       })
       .catch((error) => {
-
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "email o password incorrecto!",
+          icon: 'error',
+          title: 'Oops...',
+          text: 'email o password incorrecto!',
         });
 
-       console.log(error.message);
+        console.log(error.message);
       });
   }
-  // Sign up with email/password
-  SignUp(usuario: any) {
-    return this.afAuth
-      .createUserWithEmailAndPassword(usuario.email, usuario.password)
-      .then((result) => {
-        let user: any = result.user;
 
-        console.log(user);
-        this.SetUserData(result.user, usuario);
-        //this.usuariosService.addItem(usuario);
+  async SignUp(usuario: any) {
+    try {
+      const result = await this.afAuth.createUserWithEmailAndPassword(
+        usuario.email,
+        usuario.password
+      );
+      let user: any = result.user;
 
-        //////////////////////////////////////////////////////////////////////////////////////
+      console.log(user);
+      await this.SetUserData(result.user, usuario);
 
-        /* Call the SendVerificaitonMail() function when new user sign
-        up and returns promise */
-        this.SendVerificationMail();
+      // Llamada para enviar el correo de verificación
+      await this.SendVerificationMail();
 
-        return user;
-      })
-      .catch((error) => {
-        window.alert(error.message);
+      // Desloguear al usuario después del registro
+      await this.afAuth.signOut();
 
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////// ver para que logueee
+      //this.currentUser = {};
+      //this.userData = null;
+      //localStorage.clear();
+
+      // Redirigir a la página de verificación de correo electrónico
+      this.router.navigate(['verify-email']);
+
+      return user;
+    } catch (error: unknown) {
+      // Comprobación de tipo para asegurar que el error es una instancia de Error
+      if (error instanceof Error) {
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
+          icon: 'error',
+          title: 'Oops...',
           text: error.message,
         });
-
-      });
+      } else {
+        // Manejo de errores genéricos o desconocidos
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'An unexpected error occurred.',
+        });
+      }
+    }
   }
+
   /* Setting up user data when sign in with username/password,
 sign up with username/password and sign in with social auth
 provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
@@ -154,7 +166,6 @@ provider in Firestore database using AngularFirestore + AngularFirestoreDocument
   }
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
-
     if (typeof window !== 'undefined' && window.localStorage) {
       const user = JSON.parse(localStorage.getItem('user')!);
       console.log(user);
@@ -196,7 +207,6 @@ provider in Firestore database using AngularFirestore + AngularFirestoreDocument
     return this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
-
           return this.usuariosSv.getItemByUid(user.uid);
         } else {
           return of({ email: '', password: '' });
@@ -221,7 +231,11 @@ provider in Firestore database using AngularFirestore + AngularFirestoreDocument
       }),
       map((usuario: any) => {
         if (usuario) {
-          return usuario.emailVerified && (usuario.role === ERole.paciente  || usuario.role === ERole.administrador);
+          return (
+            usuario.emailVerified &&
+            (usuario.role === ERole.paciente ||
+              usuario.role === ERole.administrador)
+          );
         }
         return false;
       }),
@@ -267,7 +281,12 @@ provider in Firestore database using AngularFirestore + AngularFirestoreDocument
       }),
       map((usuario: any) => {
         if (usuario) {
-          return usuario.habilitado && usuario.emailVerified && (usuario.role === ERole.especialista  || usuario.role === ERole.administrador);
+          return (
+            usuario.habilitado &&
+            usuario.emailVerified &&
+            (usuario.role === ERole.especialista ||
+              usuario.role === ERole.administrador)
+          );
         }
         return false;
       }),

@@ -5,15 +5,13 @@ import { ERole, Usuario } from '../../auth/class/usuario';
 import { AuthService } from '../../auth/services/auth.service';
 import { UsuariosService } from '../../auth/services/usuarios.service';
 
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
-
-  public currentUser: Usuario = { };
+export class NavbarComponent implements OnInit, OnDestroy {
+  public currentUser: Usuario = { email: '', password: '', role: ERole.publico };
   private unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -29,11 +27,14 @@ export class NavbarComponent {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.usuariosSv.getItemById(user.uid).subscribe((res) => {
-          this.currentUser = res;
+          this.ngZone.run(() => {
+            this.currentUser = res;
+          });
         });
       } else {
-        this.currentUser = { email: '', password: '' };
-        this.currentUser.role = ERole.publico;
+        this.ngZone.run(() => {
+          this.currentUser = { email: '', password: '', role: ERole.publico };
+        });
       }
     });
   }
@@ -42,9 +43,7 @@ export class NavbarComponent {
     this.authService.userLoggedOut$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-        // Utiliza ngZone.run para asegurar que la actualización del estado del usuario esté dentro del contexto de Angular
         this.ngZone.run(() => {
-          // Limpiar el estado del usuario al cerrar sesión
           this.currentUser = { email: '', password: '', role: ERole.publico };
         });
       });

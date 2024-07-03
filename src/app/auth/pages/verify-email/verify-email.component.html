@@ -1,22 +1,20 @@
-<div class="displayTable">
-    <div class="displayTableCell">
-        <div class="authBlock">
-            <h3>Thank You for Registering</h3>
-            <div class="formGroup" *ngIf="authService.userData as user">
-                <p class="text-center">We have sent a confirmation email to <strong>{{user.email}}</strong>.</p>
-                <p class="text-center">Please check your email and click on the link to verfiy your email address.</p>
-            </div>
-
-            <!-- Calling SendVerificationMail() method using authService Api -->
-            <div class="formGroup">
-                <button type="button" class="btn btnPrimary" (click)="authService.SendVerificationMail()">
-                    <i class="fas fa-redo-alt"></i>
-                    Resend Verification Email
-                </button>
-            </div>
-        </div>
-        <div class="redirectToLogin">
-            <span>Go back to?<span class="redirect" routerLink="/sign-in"> Sign in</span></span>
-        </div>
-    </div>
+<div class="container">
+  <div class="jumbotron">
+    <img class="logo img-fluid" src="/assets/logo.png" alt="Logo">
+    <h1 class="display-4 mt-5">¡Gracias por registrarse!</h1>
+    <p class="lead">Para ingresar, debe verificar su correo electrónico.</p>
+    <p>Le hemos enviado un correo con un enlace de verificación. Por favor, haga clic en el enlace para completar el
+      proceso de verificación.</p>
+    <hr class="my-4">
+    <p>Si no recibe el correo electrónico, revise su carpeta de spam o
+      <button type="button" class="btn btn-primary btn-sm" (click)="authService.SendVerificationMail()">
+        <i class="fas fa-redo-alt"></i>
+        haga clic aquí
+      </button>
+      para reenviar el correo de verificación.
+    </p>
+  </div>
+  <div class="redirectToLogin">
+    <span>¿Ya tenés cuenta?<span class="redirect" routerLink="/sign-in"> Ingresá</span></span>
+  </div>
 </div>
