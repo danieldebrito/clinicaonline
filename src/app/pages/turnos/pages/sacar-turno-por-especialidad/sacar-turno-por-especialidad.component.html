@@ -1,0 +1,96 @@
+<div class="container">
+    <mat-stepper [linear]="isLinear" #stepper>
+
+        <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||| 1º ELEGIR especialidades ||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+        <mat-step [stepControl]="secondFormGroup" label="Seleccionar la Especialidad">
+            <form [formGroup]="secondFormGroup">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col" *ngFor="let item of especialidades">
+                        <div class="card-header especialidadimg" (click)="seleccionarEspecialidad(item); goForward(stepper)">
+                            <img [src]="item.photoURL" alt="" srcset="">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div>
+                <button type="button" class="btn btn-success p-1 m-2" mat-button matStepperPrevious>
+                    <i class="fa fa-chevron-left"></i>
+                </button>
+            </div>
+        </mat-step>
+
+        <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||| 2º ELEGIR especialistas ||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+        <mat-step [stepControl]="firstFormGroup" label="Seleccionar Especialista">
+            <form [formGroup]="firstFormGroup">
+
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col" *ngFor="let item of especialistasFiltrados">
+                      <button class="profesional-btn" (click)="getJornadasPorEspecialista(item); goForward(stepper)">
+                        <img [src]="item.photoURL" alt="{{ item.nombre }}" class="profesional-img">
+                        <p class="profesional-nombre">{{ item.nombre }}</p>
+                      </button>
+                    </div>
+                  </div>
+
+            </form>
+            <div>
+                <button type="button" class="btn btn-success p-1 m-2" mat-button matStepperPrevious>
+                    <i class="fa fa-chevron-left"></i>
+                </button>
+            </div>
+        </mat-step>
+
+        <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||| 3º ELEGIR dia ||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+        <mat-step [stepControl]="thirdFormGroup" label="Fill out your address">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Seleccionar Día</ng-template>
+
+                <app-turnos-generador-dias [jornadas]="jornadasFiltradas" [especialista]="especialistaSeleccionado"
+                    [especialidad]="especialidadSeleccionada" (throwTurno)="seleccionarHorariosPorDiaTurnos($event)"
+                    [paciente]="paciente" [turnos]="turnos" (click)="goForward(stepper)">
+                </app-turnos-generador-dias>
+
+                <div>
+                    <button type="button" class="btn btn-success p-1 m-2" mat-button matStepperPrevious><i
+                            class="fa fa-chevron-left"></i></button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||| 4º ELEGIR hora ||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+        <mat-step [stepControl]="thirdFormGroup" label="Fill out your address">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Seleccionar Hora</ng-template>
+
+                <app-turnos-gris-horarios [turnos]="turnosHorariosDia"
+                    (throwTurnoSeleccionado)="SeleccionarTurno($event)"
+                    (click)="goForward(stepper)"></app-turnos-gris-horarios>
+
+                <div>
+                    <button type="button" class="btn btn-success p-1 m-2" mat-button matStepperPrevious><i
+                            class="fa fa-chevron-left"></i></button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||| 5º RESUMEN ||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+        <mat-step>
+            <ng-template matStepLabel>Resumen</ng-template>
+
+            <app-turno-detalle [turno]="turnoSeleccionado" (thowTurno)="tomarTurno($event)" (click)="stepper.reset()"
+                (click)="tinyAlert()"></app-turno-detalle>
+
+            <div>
+                <button type="button" class="btn btn-success p-1 m-2" mat-button matStepperPrevious>
+                    <i class="fa fa-chevron-left"></i>
+                </button>
+            </div>
+        </mat-step>
+
+    </mat-stepper>
+</div>

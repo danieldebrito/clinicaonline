@@ -1,0 +1,53 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-mdc-form-field {
+    margin-top: 16px;
+  }
+
+  .especialidadimg img {
+    border-radius: 50%;
+    width: 100px; /* Ajusta este valor según el tamaño deseado */
+    height: 100px; /* Ajusta este valor según el tamaño deseado */
+    object-fit: cover; /* Para asegurar que la imagen se ajuste bien dentro del contenedor */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transiciones suaves para el hover */
+}
+
+.especialidadimg img:hover {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño de la imagen */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade sombra a la imagen */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar sobre la imagen */
+}
+
+
+.profesional-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.profesional-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.profesional-nombre {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.profesional-btn:hover .profesional-img {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+

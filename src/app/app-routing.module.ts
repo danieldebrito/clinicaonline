@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'mispacientes', loadChildren: () => import('./pages/especialistas/pages/mis-pacientes/mis-pacientes.module').then(m => m.MisPacientesModule) },
   { path: 'historiaclinica', loadChildren: () => import('./pages/historia-clinica/historia-clinica.module').then(m => m.HistoriaClinicaModule) },
   { path: 'perfilpaciente', loadChildren: () => import('./pages/pacientes/pages/perfil-paciente/perfil-paciente.module').then(m => m.PerfilPacienteModule) },
+  { path: 'sacarturnoesp', loadChildren: () => import('./pages/turnos/pages/sacar-turno-por-especialidad/sacar-turno-por-especialidad.module').then(m => m.SacarTurnoPorEspecialidadModule) },
 ];
 
 @NgModule({
