@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from './auth/guard/auth.guard';
 import { PacienteGuard } from './guard/paciente.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { EspecialistaGuard } from './guard/espacialista.guard';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,7 +21,7 @@ const routes: Routes = [
 
   { path: 'administrador', loadChildren: () => import('./pages/admin/administrador.module').then(m => m.AdministradorModule), canActivate: [AdminGuard] },
   { path: 'jornadas', loadChildren: () => import('./pages/especialistas/pages/jornada/jornada.module').then(m => m.JornadaModule), canActivate: [EspecialistaGuard] },
-  { path: 'misturnos', loadChildren: () => import('./pages/turnos/pages/mis-turnos/mis-turnos.module').then(m => m.MisTurnosModule)},
+  { path: 'misturnos', loadChildren: () => import('./pages/turnos/pages/mis-turnos/mis-turnos.module').then(m => m.MisTurnosModule), canActivate: [AuthGuard]},
   { path: 'sacarturno', loadChildren: () => import('./pages/turnos/pages/sacar-turno/sacar-turno.module').then(m => m.SacarTurnoModule), canActivate: [PacienteGuard] },
   { path: 'especialidades', loadChildren: () => import('./pages/especialidades/especialidades.module').then(m => m.EspecialidadesModule), canActivate: [AdminGuard] },
   { path: 'atenderturno', loadChildren: () => import('./pages/especialistas/pages/atender-turno/atender-turno.module').then(m => m.AtenderTurnoModule) },

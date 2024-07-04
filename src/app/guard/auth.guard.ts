@@ -6,19 +6,26 @@ import {
   UrlTree,
 } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard {
-  constructor(public authService: AuthService, public router: Router) { }
+  constructor(public authService: AuthService, public router: Router) {}
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | UrlTree | boolean {
-    if (this.authService.isLoggedIn != true) {
-      this.router.navigate(['denegado']);
-    }
-    return true;
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return of(this.authService.isLoggedIn).pipe(
+      map((isLoggedIn: boolean) => {
+        if (!isLoggedIn) {
+          return this.router.createUrlTree(['denegado']);
+        }
+        return true;
+      })
+    );
   }
 }

@@ -2,27 +2,18 @@ import { Directive, ElementRef, Input } from '@angular/core';
 import { EEstadoTurno, Turno } from '../class/turno';
 
 @Directive({
-  selector: '[appTurnoCancelado]',
+  selector: '[appTurnoAceptado]',
 })
-export class TurnoCanceladoBackGroundDirective {
+export class TurnoAceptadoBackGroundDirective {
   @Input() appTurnoCancelado: Turno = {};
 
   constructor(private refElement: ElementRef) {}
 
   private getBackgroundColor() {
-
     let color: string = 'rgb(197, 188, 188)'; //grisado
-
-    if (this.appTurnoCancelado.estado == EEstadoTurno.cancelado) {
-      color = 'rgb(250, 149, 149)';
-    }
 
     if (this.appTurnoCancelado.estado == EEstadoTurno.aceptado) {
       color = '#39afd3';  //azul celestito
-    }
-
-    if (this.appTurnoCancelado.estado == EEstadoTurno.cumplido) {
-      color = '#CAEFAC';  //verde
     }
 
     return color;
