@@ -102,7 +102,7 @@ export class SignUpComponent {
 
       //const habilitadoValue = this.createForm.value.habilitado === 'true' ? true : false;
 
-      const newEspecialista: Paciente = {
+      const newPaciente: Paciente = {
         //id: this.createForm.value.id ?? '',
         emailVerified: false,
 
@@ -122,7 +122,7 @@ export class SignUpComponent {
         habilitado: true,
       };
 
-      this.authService.SignUp(newEspecialista);
+      this.authService.SignUp(newPaciente);
       // console.log(newEspecialista);
       //this.usuariosService.addItem(newEspecialista);
 

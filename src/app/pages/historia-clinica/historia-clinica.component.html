@@ -1,14 +1,13 @@
 <div class="container mt-3">
   <p class="fs-3">Historia Clinica : </p>
 
-  <button type="button" class="btn btn-danger" (click)="generatePDF()"><i class="fa fa-file"></i>&nbsp;Generar PDF</button>
-
-
   <div class="row mt-3">
-    <div class="col-sm-3">
+    <div class="col-sm-6">
       <app-paciente-card [paciente]="paciente"></app-paciente-card>
     </div>
-    <div class="col-sm-9" *ngIf="paciente != undefined">{{ paciente | nombreApellidoPipe }} </div>
+    <div class="col-sm-6">
+      <button type="button" class="btn btn-danger" (click)="generatePDF()"><i class="fa fa-file"></i>&nbsp;Generar PDF</button>
+    </div>
     <!-- Inside your *ngFor loop in the template -->
     <div class="col-sm-12" *ngFor="let turno of turnosPaciente">
       <div class="card mt-3">

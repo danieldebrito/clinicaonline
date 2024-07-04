@@ -4,6 +4,7 @@ import { PacienteCardComponent } from './paciente-card/paciente-card.component';
 import { PacientesGridComponent } from './pacientes-grid/pacientes-grid.component';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { PacienteFichaComponent } from './paciente-ficha/paciente-ficha.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { PacienteFichaComponent } from './paciente-ficha/paciente-ficha.componen
   ],
   imports: [
     CommonModule,
-    PipesModule
+    PipesModule,
+    RouterModule
   ],
   exports: [
     PacienteCardComponent,

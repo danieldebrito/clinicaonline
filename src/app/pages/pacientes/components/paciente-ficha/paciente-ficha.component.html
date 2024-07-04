@@ -6,9 +6,14 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="p-2">
-                            <div class="mt-2">
+                            <div class="avatar mt-2">
                                 <img [src]="paciente?.photoURL || 'assets/images/placeholder-user.png'" class="img-fluid" alt="No image">
                             </div>
+
+                            <div class="mt-4">
+                                <button type="button" class="btn btn-success" routerLink="/historiaclinica">Ver Historia Clinica</button>
+                            </div>
+
                         </div>
                     </div>
 
@@ -16,13 +21,13 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div>
-                                    <label class="form-label">Email:</label>
+                                    <label class="form-label"><strong>Email:</strong></label>
                                     <p>{{ paciente?.email }}</p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div>
-                                    <label class="form-label">Nombre:</label>
+                                    <label class="form-label"><strong>Nombre:</strong></label>
                                     <p>{{ paciente?.nombre }}</p>
                                 </div>
                             </div>
@@ -31,13 +36,13 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div>
-                                    <label class="form-label">Apellido:</label>
+                                    <label class="form-label"><strong>Apellido:</strong></label>
                                     <p>{{ paciente?.apellido }}</p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div>
-                                    <label class="form-label">Display Name:</label>
+                                    <label class="form-label"><strong>Display Name:</strong></label>
                                     <p>{{ paciente?.displayName }}</p>
                                 </div>
                             </div>
@@ -46,13 +51,13 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div>
-                                    <label class="form-label">Sexo:</label>
+                                    <label class="form-label"><strong>Sexo:</strong></label>
                                     <p>{{ paciente?.sexo }}</p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div>
-                                    <label class="form-label">Edad:</label>
+                                    <label class="form-label"><strong>Edad:</strong></label>
                                     <p>{{ paciente?.edad }}</p>
                                 </div>
                             </div>
@@ -61,13 +66,13 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div>
-                                    <label class="form-label">DNI:</label>
+                                    <label class="form-label"><strong>DNI:</strong></label>
                                     <p>{{ paciente?.dni }}</p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div>
-                                    <label class="form-label">Fecha de Nacimiento:</label>
+                                    <label class="form-label"><strong>Fecha de Nacimiento:</strong></label>
                                     <p>{{ paciente?.fechaNacimiento }}</p>
                                 </div>
                             </div>
@@ -76,13 +81,13 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div>
-                                    <label class="form-label">Rol:</label>
+                                    <label class="form-label"><strong>Rol:</strong></label>
                                     <p>{{ paciente?.role }}</p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div>
-                                    <label class="form-label">Estado:</label>
+                                    <label class="form-label"><strong>Estado:</strong></label>
                                     <p>{{ paciente?.habilitado ? 'Habilitado' : 'No habilitado' }}</p>
                                 </div>
                             </div>
@@ -90,17 +95,17 @@
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <label class="form-label">Foto de DNI:</label>
+                                <label class="form-label"><strong>Foto de DNI:</strong></label>
 
                                 <div class="p-2">
-                                    <div class="mt-2">
+                                    <div class="dni mt-2">
                                         <img [src]="paciente?.photoDNIURL || 'assets/images/placeholder-user.png'" class="img-fluid" alt="No image">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div>
-                                    <label class="form-label">Obra Social:</label>
+                                    <label class="form-label"><strong>Obra Social:</strong></label>
                                     <p>{{ paciente?.obraSocial }}</p>
                                 </div>
                             </div>
@@ -111,4 +116,3 @@
         </div>
     </div>
 </div>
-
