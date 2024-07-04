@@ -1,0 +1,67 @@
+Augusto Morelli
+19:51
+* Botones de Acceso rápido
+- Deben ser botones redondos
+- Deben tener la imagen de perfil del usuario
+- Deben estar abajo del login, uno al lado del otro, 6 usuarios (3 pacientes, 2 especialistas, 1 admin)
+
+* Registro de usuarios
+- Al ingresar a la página solo se deben ver 2 imágenes que represente a un paciente o especialista,
+  según esa elección mostrará un formulario correspondiente.
+- Estas imágenes deben estar en botones redondos.
+
+---------------------------------------------------------------------------------------------------------------
+
+
+Augusto Morelli
+22:11
+* Sacar un turno
+
+ - Comienza mostrando las ESPECIALIDADES en botones con la imagen de la especialidad, en caso
+ de no tener muesra imagen por default. Deben ser botones redondos sin el nombre de la especialidad
+ 
+ - Una vez seleccionada mostrará los PROFESIONALES, en botones con la imagen de perfil de cada 
+ profesional y su nombre debajo. Estos botones deben ser redondos.
+ 
+- Una vez seleccionado el profesional, aparecerán los días con turnos disponibles para 
+ese PROFESIONAL. Estos botones deben ser rectangulares. Formato (09/09).
+
+ - Seleccionado el día mostrará los horarios disponibles. Estos botones deben ser rectangulares.
+ Formato 12:15am,
+ 
+ ---------------------------------------------------------------------------------------------------------------
+
+ 
+Augusto Morelli
+20:30
+Sección Pacientes,
+Para los especialistas. Solo deberá mostrar los usuarios que el
+especialista haya atendido al menos 1 vez.
+Mostrar los usuarios con un favbutton redondo , imagen y nombre, al seleccionar un paciente  
+se muestra los dellaes de los turnos y un acceso a la reseña  de cada consulta
+
+
+Augusto Morelli
+20:31
+Sección usuarios
+Solamente para el perfil Administrador, un excel con los datos de los
+usuarios.
+Mostrar los usuarios con un favbutton redondo , imagen y nombre.Al seleccionarlo descarga los datos 
+de que turnos tomo y con quien
+
+
+Mi perfil
+Para los usuarios paciente, un pdf con la historia clínica. El PDF tiene que tener
+logo de la clínica, título del informe y fecha de emisión.
+Poder bajar Todas las atenciones que realice segun un PROFESIONAL
+
+
+
+Augusto Morelli
+20:33
+Animaciones
+Se debe agregar al menos 2, como mínimo, animaciones de transición entre componentes al navegar
+la aplicación.
+Derecha a izquierda
+
+---------------------------------------------------------------------------------------------------------------
