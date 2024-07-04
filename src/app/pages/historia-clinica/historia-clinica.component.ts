@@ -37,7 +37,7 @@ export class HistoriaClinicaComponent implements OnInit {
     const pdf = new jsPDF();
 
     // Position of the image
-    pdf.addImage('assets/logo/logo.png', 'PNG', 10, 10, 40, 10);
+    pdf.addImage('assets/logo.png', 'PNG', 10, 10, 40, 10);
 
     // Set font size and type for the title
     pdf.setFontSize(16);

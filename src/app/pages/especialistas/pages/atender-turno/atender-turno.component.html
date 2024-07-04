@@ -1,11 +1,9 @@
 <div class="container">
   <div *ngIf="turno">
     <p class="fs-2">Atención de Turno</p>
-
     <hr>
 
     <p class="fs-4"><strong>Especialista:</strong></p>
-
     <div class="row" *ngIf="turno">
       <div class="col-sm-6 mt-3">
         <app-especialista-card [especialista]="turno?.especialista"></app-especialista-card>
@@ -26,12 +24,10 @@
 
     <!-- Form Section -->
     <form [formGroup]="createForm">
-
       <div class="row">
         <div class="col-sm-3 mb-3">
           <label for="altura" class="form-label">Altura:</label>
-          <input type="number" class="form-control" id="altura" formControlName="altura" required minlength="2"
-            maxlength="3">
+          <input type="number" class="form-control" id="altura" formControlName="altura" required minlength="2" maxlength="3">
           <div *ngIf="createForm.get('altura')?.touched && createForm.get('altura')?.errors?.['required']">
             Altura es requerida.
           </div>
@@ -45,8 +41,7 @@
 
         <div class="col-sm-3 mb-3">
           <label for="peso" class="form-label">Peso:</label>
-          <input type="number" class="form-control" id="peso" formControlName="peso" required minlength="1"
-            maxlength="3">
+          <input type="number" class="form-control" id="peso" formControlName="peso" required minlength="1" maxlength="3">
           <div *ngIf="createForm.get('peso')?.touched && createForm.get('peso')?.errors?.['required']">
             Peso es requerido.
           </div>
@@ -60,8 +55,7 @@
 
         <div class="col-sm-3 mb-3">
           <label for="temperatura" class="form-label">Temperatura:</label>
-          <input type="number" class="form-control" id="temperatura" formControlName="temperatura" required
-            minlength="2" maxlength="3">
+          <input type="number" class="form-control" id="temperatura" formControlName="temperatura" required minlength="2" maxlength="3">
           <div *ngIf="createForm.get('temperatura')?.touched && createForm.get('temperatura')?.errors?.['required']">
             Temperatura es requerida.
           </div>
@@ -75,8 +69,7 @@
 
         <div class="col-sm-3 mb-3">
           <label for="presion" class="form-label">Presión:</label>
-          <input type="number" class="form-control" id="presion" formControlName="presion" required minlength="2"
-            maxlength="3">
+          <input type="number" class="form-control" id="presion" formControlName="presion" required minlength="2" maxlength="3">
           <div *ngIf="createForm.get('presion')?.touched && createForm.get('presion')?.errors?.['required']">
             Presión es requerida.
           </div>
@@ -88,7 +81,6 @@
           </div>
         </div>
       </div>
-
 
       <div class="row">
         <div class="col-sm-12">
@@ -105,38 +97,31 @@
         </div>
       </div>
 
-
-      <p class="fs-5">Datos Adicionales ( hasta tres ) : </p>
+      <p class="fs-5">Datos Adicionales (hasta tres): </p>
       <hr>
 
-      <form formArrayName="dinamicos" class="row row-cols-lg-auto g-3 align-items-center">
-        <div class="row mt-2" *ngFor="let control of dinamicosFormArray.controls; let i = index">
-
+      <div formArrayName="dinamicos" class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="row mt-2" *ngFor="let control of dinamicosFormArray.controls; let i = index" [formGroupName]="i">
           <div class="col-5">
             <label [for]="'dinamicoKey' + i" class="form-label">Dato:</label>
             <div class="input-group">
-              <input type="text" class="form-control" [id]="'dinamicoKey' + i"
-                [formControl ??]="dinamicosFormArray.controls[i].get('dinamicoKey')" required>
+              <input type="text" class="form-control" [id]="'dinamicoKey' + i" formControlName="dinamicoKey" required>
             </div>
           </div>
 
           <div class="col-5">
             <label [for]="'dinamicoValue' + i" class="form-label">Valor:</label>
             <div class="input-group">
-              <input type="text" class="form-control" [id]="'dinamicoValue' + i"
-                [formControl ??]="dinamicosFormArray.controls[i].get('dinamicoValue')" required>
+              <input type="text" class="form-control" [id]="'dinamicoValue' + i" formControlName="dinamicoValue" required>
             </div>
           </div>
 
           <div class="col-2">
             <label class="form-label">Borrar:</label>
-
-            <button type="button" class="btn btn-danger" (click)="deleteDinamico(i)"><i
-                class="fa fa-trash"></i></button>
+            <button type="button" class="btn btn-danger" (click)="deleteDinamico(i)"><i class="fa fa-trash"></i></button>
           </div>
-
         </div>
-      </form>
+      </div>
 
       <div class="mt-3 mb-3" *ngIf="dinamicosFormArray.length < 3">
         <button type="button" class="btn btn-primary" (click)="addDinamico()">Agregar Dato</button>
@@ -147,7 +132,6 @@
           Finalizar Turno
         </button>
       </div>
-
     </form>
     <!-- End Form Section -->
   </div>
