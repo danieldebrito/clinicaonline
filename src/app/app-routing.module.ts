@@ -5,6 +5,7 @@ import { PacienteGuard } from './guard/paciente.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { EspecialistaGuard } from './guard/espacialista.guard';
 import { AuthGuard } from './guard/auth.guard';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -29,11 +30,13 @@ const routes: Routes = [
   { path: 'historiaclinica', loadChildren: () => import('./pages/historia-clinica/historia-clinica.module').then(m => m.HistoriaClinicaModule) },
   { path: 'perfilpaciente', loadChildren: () => import('./pages/pacientes/pages/perfil-paciente/perfil-paciente.module').then(m => m.PerfilPacienteModule) },
   { path: 'sacarturnoesp', loadChildren: () => import('./pages/turnos/pages/sacar-turno-por-especialidad/sacar-turno-por-especialidad.module').then(m => m.SacarTurnoPorEspecialidadModule) },
+  { path: 'graficoturnoespecialidad', loadChildren: () => import('./pages/turnos/pages/grafico-turno-por-especialidad/grafico-turno-por-especialidad.module').then(m => m.GraficoTurnoPorEspecialidadModule) },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }]
 })
 export class AppRoutingModule { }
 

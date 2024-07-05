@@ -21,6 +21,7 @@ import {
 import { environment } from '../environments/environment.prod';
 import { AngularFireModule } from '@angular/fire/compat';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     provideDatabase(() => getDatabase()),
     provideStorage(() => getStorage()),
     provideAnimationsAsync(),
+    provideCharts(withDefaultRegisterables()),
   ],
   bootstrap: [AppComponent],
 })
