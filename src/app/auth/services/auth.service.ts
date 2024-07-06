@@ -181,7 +181,10 @@ provider in Firestore database using AngularFirestore + AngularFirestoreDocument
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['home']);
+
       this.userData = null;
+      localStorage.clear();
+
       // Emitir evento de cierre de sesión
       this._userLoggedOutSubject.next();
     });
