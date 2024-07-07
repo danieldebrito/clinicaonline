@@ -1,0 +1,11 @@
+<div class="turnos-por-dia-container">
+  <h2>Turnos Médico por Día</h2>
+  <form [formGroup]="dateRangeForm">
+    <label for="startDate">Fecha de inicio:</label>
+    <input type="date" id="startDate" formControlName="startDate">
+    
+    <label for="endDate">Fecha de fin:</label>
+    <input type="date" id="endDate" formControlName="endDate">
+  </form>
+  <canvas #turnosPorMedicoChart></canvas>
+</div>

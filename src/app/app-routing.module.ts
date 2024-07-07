@@ -31,6 +31,8 @@ const routes: Routes = [
   { path: 'perfilpaciente', loadChildren: () => import('./pages/pacientes/pages/perfil-paciente/perfil-paciente.module').then(m => m.PerfilPacienteModule) },
   { path: 'sacarturnoesp', loadChildren: () => import('./pages/turnos/pages/sacar-turno-por-especialidad/sacar-turno-por-especialidad.module').then(m => m.SacarTurnoPorEspecialidadModule) },
   { path: 'graficoturnoespecialidad', loadChildren: () => import('./pages/turnos/pages/grafico-turno-por-especialidad/grafico-turno-por-especialidad.module').then(m => m.GraficoTurnoPorEspecialidadModule) },
+  { path: 'graficoturnopordia', loadChildren: () => import('./pages/turnos/pages/grafico-turno-por-dia/grafico-turno-por-dia.module').then(m => m.GraficoTurnoPorDiaModule) },
+  { path: 'grafdicoturnopormedico', loadChildren: () => import('./pages/turnos/pages/grafico-turno-por-medico/grafico-turno-por-medico.module').then(m => m.GraficoTurnoPorMedicoModule) },
 ];
 
 @NgModule({

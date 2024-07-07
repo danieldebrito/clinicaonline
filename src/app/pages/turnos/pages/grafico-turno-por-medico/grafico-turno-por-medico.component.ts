@@ -1,0 +1,199 @@
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Chart, registerables } from 'chart.js';
+import { Turno } from '../../../../class/turno';
+import { turnosService } from '../../../../services/turnos.service';
+import { EspecialidadesService } from '../../../../services/especialidades.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
+
+@Component({
+  selector: 'app-grafico-turno-por-medico',
+  templateUrl: './grafico-turno-por-medico.component.html',
+  styleUrls: ['./grafico-turno-por-medico.component.scss'],
+})
+export class GraficoTurnoPorMedicoComponent implements OnInit, AfterViewInit {
+  @Input() turnos: Turno[] = [];
+  especialidades: any[] = [];
+  cantidadTurnosPorMedico: { [key: string]: any } = {};
+  chartData: any = [];
+  chartInstance: any = null;
+  dateRangeForm: FormGroup;
+
+  @ViewChild('turnosPorMedicoChart') turnosPorMedicoChart!: ElementRef<HTMLCanvasElement>;
+
+  constructor(
+    private turnoService: turnosService,
+    private especialidadesService: EspecialidadesService,
+    private fb: FormBuilder
+  ) {
+    Chart.register(...registerables);
+
+    // Initialize form
+    this.dateRangeForm = this.fb.group({
+      startDate: [''],
+      endDate: ['']
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.cargarDatos();
+  }
+
+  cargarDatos(startDate?: string, endDate?: string): void {
+    this.turnoService.getItems().subscribe(
+      turnos => {
+        this.turnos = turnos;
+        if (startDate && endDate) {
+          this.turnos = this.turnos.filter(turno => {
+            if (turno.fechaHora) {
+              const turnoDate = new Date( ( turno.fechaHora.year ?? 0 ), (turno.fechaHora.mes ?? 1) - 1, turno.fechaHora.dia ?? 1);
+              return turnoDate >= new Date(startDate) && turnoDate <= new Date(endDate);
+            }
+            return false;
+          });
+        }
+        this.especialidadesService.getItems().subscribe(
+          (especialidades) => {
+            this.especialidades = especialidades.map(
+              (especialidad) => especialidad.nombre
+            );
+            this.procesarTurnos();
+          },
+          (error) => {
+            console.error('Error al obtener especialidades:', error);
+          }
+        );
+      },
+      (error) => {
+        console.error('Error al obtener turnos:', error);
+      }
+    );
+  }
+
+  procesarTurnos(): void {
+    this.cantidadTurnosPorMedico = {};
+
+    this.turnos.forEach((turno) => {
+      if (turno.fechaHora && turno.especialista?.nombre && turno.especialista?.apellido) {
+        const year = turno.fechaHora.year ?? 0;
+        const mes = turno.fechaHora.mes ?? 1; // Default to January if undefined
+        const dia = turno.fechaHora.dia ?? 1; // Default to 1st day if undefined
+        const fecha = `${year}/${mes}/${dia}`;
+        const key = `${turno.especialista.nombre} ${turno.especialista.apellido} - ${fecha}`;
+
+        if (!this.cantidadTurnosPorMedico[key]) {
+          this.cantidadTurnosPorMedico[key] = 0;
+        }
+
+        this.cantidadTurnosPorMedico[key]++;
+      }
+    });
+
+    // Agrupar datos por médico (opcional)
+    this.cantidadTurnosPorMedico = this.groupDataByDoctor(this.cantidadTurnosPorMedico);
+    console.log('Cantidad de Turnos por Medico:', this.cantidadTurnosPorMedico);
+
+    // Convertir datos al formato del gráfico
+    this.chartData = this.prepareChartData(this.cantidadTurnosPorMedico);
+    console.log('Chart Data:', this.chartData);
+
+    // Call generarGrafico after processing data
+    this.generarGrafico();
+  }
+
+  generarGrafico(): void {
+    console.log('Generating chart with data:', this.chartData);
+
+    if (this.chartInstance) {
+      this.chartInstance.destroy();
+    }
+
+    if (this.chartData) {
+      const ctx = this.turnosPorMedicoChart.nativeElement.getContext('2d');
+      if (ctx) {
+        this.chartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: this.chartData,
+          options: {
+            responsive: true,
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Fecha'
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: 'Cantidad de Turnos'
+                }
+              }
+            }
+          }
+        });
+      } else {
+        console.error('Failed to get 2D context');
+      }
+    } else {
+      console.error('Canvas element not found');
+    }
+  }
+
+  groupDataByDoctor(data: { [key: string]: number }): { [doctor: string]: { [fecha: string]: number } } {
+    const groupedData: { [doctor: string]: { [fecha: string]: number } } = {};
+    for (const [key, count] of Object.entries(data)) {
+      const [doctor, fecha] = key.split(' - ');
+      if (!groupedData[doctor]) {
+        groupedData[doctor] = {};
+      }
+      groupedData[doctor][fecha] = count;
+    }
+    return groupedData;
+  }
+
+  prepareChartData(data: { [doctor: string]: { [fecha: string]: number } }): any {
+    const labels: string[] = [];
+    const datasets: any[] = [];
+
+    // Collect all unique dates for labels
+    const allDates = new Set<string>();
+    for (const doctor in data) {
+      Object.keys(data[doctor]).forEach(date => allDates.add(date));
+    }
+
+    labels.push(...Array.from(allDates).sort());
+
+    // Create datasets for each doctor
+    for (const doctor in data) {
+      const doctorData = data[doctor];
+      const doctorCounts = labels.map(date => doctorData[date] || 0);
+
+      datasets.push({
+        label: doctor,
+        data: doctorCounts,
+        // You can customize the dataset here (e.g., backgroundColor, borderColor)
+        backgroundColor: this.getRandomColor()
+      });
+    }
+
+    return {
+      labels,
+      datasets,
+    };
+  }
+
+  getRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  ngOnInit(): void {
+    this.dateRangeForm.valueChanges.subscribe(values => {
+      this.cargarDatos(values.startDate, values.endDate);
+    });
+  }
+}

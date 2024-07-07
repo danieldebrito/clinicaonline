@@ -19,7 +19,8 @@
       </ul>
 
       <!--///////////////////////////////////////////////////  MENU PACIENTE  ///////////////////////////////////////////////////-->
-      <ul *ngIf="currentUser && authService.userData && currentUser.role === 'paciente'" class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul *ngIf="currentUser && authService.userData && currentUser.role === 'paciente'"
+        class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
         </li>
@@ -33,11 +34,12 @@
             <li><a class="dropdown-item" routerLink="/sacarturno">Sacar Turno por Especialista</a></li>
             <li><a class="dropdown-item" routerLink="/sacarturnoesp">Sacar Turno por Especialidad</a></li>
           </ul>
-        </li>       
+        </li>
       </ul>
 
       <!--///////////////////////////////////////////////////  MENU ADMINISTRADOR  ///////////////////////////////////////////////////-->
-      <ul *ngIf="currentUser && authService.userData && currentUser.role === 'administrador'" class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul *ngIf="currentUser && authService.userData && currentUser.role === 'administrador'"
+        class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
         </li>
@@ -48,12 +50,15 @@
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Graficos</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" routerLink="/graficoturnoespecialidad">Turnos por Especialidad</a></li>
+            <li><a class="dropdown-item" routerLink="/graficoturnopordia">Turnos por Día</a></li>
+            <li><a class="dropdown-item" routerLink="/grafdicoturnopormedico">Turnos por Medico</a></li>
           </ul>
         </li>
       </ul>
 
       <!--///////////////////////////////////////////////////  MENU ESPECIALISTA  ///////////////////////////////////////////////////-->
-      <ul *ngIf="currentUser && authService.userData && currentUser.role === 'especialista'" class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul *ngIf="currentUser && authService.userData && currentUser.role === 'especialista'"
+        class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
         </li>
@@ -61,7 +66,8 @@
           <a class="nav-link active" aria-current="page" routerLink="/jornadas">Mi Perfil</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pacientes</a>
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">Pacientes</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" routerLink="/misturnos">Mis Turnos</a></li>
           </ul>
