@@ -17,6 +17,8 @@ import { jsPDF } from 'jspdf';
 export class HistoriaClinicaComponent implements OnInit {
   public paciente: Paciente = { email: '', password: '' };
   public turnosPaciente: Turno[] = [];
+  profesionalSeleccionado: any;
+  especialistas: any = [];
 
   constructor(
     private usuariosSv: UsuariosService,
@@ -28,7 +30,7 @@ export class HistoriaClinicaComponent implements OnInit {
     }
   }
 
-  getFormattedDate(fecha:any): string {
+  getFormattedDate(fecha: any): string {
     const date = fecha.toDate();
     return date.toISOString();
   }
@@ -94,6 +96,26 @@ export class HistoriaClinicaComponent implements OnInit {
     pdf.save('historia_clinica.pdf');
   }
 
+  obtenerTurnosProfesional() {
+    console.log(this.profesionalSeleccionado);
+
+    if (this.profesionalSeleccionado) {
+      this.turnosSv.getItems().subscribe((turnos) => {
+        this.turnosPaciente = turnos.filter(
+          (e) =>
+            e.especialista?.uid == this.profesionalSeleccionado && this.turnosSv.turnoPaciente.uid &&
+            e.estado == EEstadoTurno.cumplido
+        );
+        // Llamar a la función para generar el PDF con los turnos filtrados
+        //this.generatePDF();
+      });
+    } else {
+      // Manejar el caso en el que no se haya seleccionado ningún especialista
+      console.error('Debe seleccionar un especialista');
+      // Puedes mostrar un mensaje al usuario o manejarlo de otra manera apropiada
+    }
+  }
+
   // USUARIOS //////////////////////////////////////////////////////////////////////////////////
   private getCurrentUser() {
     this.afAuth.authState.subscribe((user) => {
@@ -112,6 +134,10 @@ export class HistoriaClinicaComponent implements OnInit {
                     e.paciente?.uid == this.turnosSv.turnoPaciente.uid &&
                     e.estado == EEstadoTurno.cumplido
                 );
+
+                this.especialistas = this.turnosPaciente.map(
+                  (e) => e.especialista
+                );
               }
             });
           }
@@ -125,8 +151,8 @@ export class HistoriaClinicaComponent implements OnInit {
   obtenerCalificacion() {
     // Supongamos que obtienes la calificación y el comentario desde algún servicio o directamente
     const calificacion = 5; // Esto debería ser dinámico en tu aplicación
-    const comentario = "Me atendió muy bien";
-  
+    const comentario = 'Me atendió muy bien';
+
     // Mostrar SweetAlert con la calificación y el comentario
     Swal.fire({
       icon: 'info',
@@ -135,13 +161,13 @@ export class HistoriaClinicaComponent implements OnInit {
         <p>Calificación: ${calificacion}</p>
         <p>Comentario: ${comentario}</p>
       `,
-      confirmButtonText: 'Cerrar'
+      confirmButtonText: 'Cerrar',
     });
   }
-  
 
   ngOnInit(): void {
     this.getCurrentUser();
+
     this.turnosSv.getItems().subscribe((res) => {
       const turnos: Turno[] = res;
 

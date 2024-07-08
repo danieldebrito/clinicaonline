@@ -22,12 +22,14 @@ import { environment } from '../environments/environment.prod';
 import { AngularFireModule } from '@angular/fire/compat';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     LayoutModule,
     HttpClientModule,
