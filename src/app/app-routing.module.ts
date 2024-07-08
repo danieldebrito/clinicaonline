@@ -8,21 +8,21 @@ import { AuthGuard } from './guard/auth.guard';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full', data: { animation: 'home' }  },
   // auth
-  { path: 'sign-in', loadChildren: () => import('./auth/pages/sign-in/sign-in.module').then(m => m.SignInModule) },
+  { path: 'sign-in', loadChildren: () => import('./auth/pages/sign-in/sign-in.module').then(m => m.SignInModule), data: { animation: 'sign-in' } },
   { path: 'forgot-password', loadChildren: () => import('./auth/pages/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule) },
   { path: 'verify-email', loadChildren: () => import('./auth/pages/verify-email/verify-email.module').then(m => m.VerifyEmailModule) },
   { path: 'signup-paciente', loadChildren: () => import('./auth/pages/sign-up-paciente/sign-up.module').then(m => m.SignUpModule), data: { animation: 'registro' } },
   { path: 'signup-especialista', loadChildren: () => import('./auth/pages/sign-up-especialista/sign-up-especialista.module').then(m => m.SignUpEspecialistaModule), data: { animation: 'registro' } },
   { path: 'signup-selector', loadChildren: () => import('./auth/pages/sign-up-selector/sign-up-selector.module').then(m => m.SignUpSelectorModule), data: { animation: 'selector' } },
   // pages
-  { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
+  { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule), data: { animation: 'home' } },
   { path: 'denegado', loadChildren: () => import('./pages/denegado/denegado.module').then(m => m.DenegadoModule) },
-
+//admin
   { path: 'administrador', loadChildren: () => import('./pages/admin/administrador.module').then(m => m.AdministradorModule), canActivate: [AdminGuard] },
   { path: 'jornadas', loadChildren: () => import('./pages/especialistas/pages/jornada/jornada.module').then(m => m.JornadaModule), canActivate: [EspecialistaGuard] },
-  { path: 'misturnos', loadChildren: () => import('./pages/turnos/pages/mis-turnos/mis-turnos.module').then(m => m.MisTurnosModule), canActivate: [AuthGuard]},
+  { path: 'misturnos', loadChildren: () => import('./pages/turnos/pages/mis-turnos/mis-turnos.module').then(m => m.MisTurnosModule), canActivate: [AuthGuard] },
   { path: 'sacarturno', loadChildren: () => import('./pages/turnos/pages/sacar-turno/sacar-turno.module').then(m => m.SacarTurnoModule), canActivate: [PacienteGuard] },
   { path: 'especialidades', loadChildren: () => import('./pages/especialidades/especialidades.module').then(m => m.EspecialidadesModule), canActivate: [AdminGuard] },
   { path: 'atenderturno', loadChildren: () => import('./pages/especialistas/pages/atender-turno/atender-turno.module').then(m => m.AtenderTurnoModule) },

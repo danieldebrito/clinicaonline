@@ -1,11 +1,7 @@
 <div class="VariableFont_wght">
-
     <app-navbar></app-navbar>
-
     <div class="padding" [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''" [@routeAnimations]="prepareRoute(o)">
         <router-outlet #o="outlet"></router-outlet>
     </div>
-
     <app-footer></app-footer>
-
 </div>
