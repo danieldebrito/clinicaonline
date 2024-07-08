@@ -12,6 +12,7 @@ import { LogUserService } from '../../../../auth/services/log-user.service';
 })
 export class LogsComponent implements OnInit {
   public logs: UserLog[] = [];
+  public p: number = 1; // Página actual
 
   constructor(private logsSv: LogUserService, private datePipe: DatePipe) {}
 
@@ -33,7 +34,6 @@ export class LogsComponent implements OnInit {
       console.table(this.logs);
     });
   }
-
 
   getFormattedDate(log: UserLog): any {
     const date = log.fechaIngreso.toDate();

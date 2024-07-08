@@ -49,6 +49,10 @@
                 <div class="col" *ngFor="let item of turno.atencionPaciente.dinamicos">
                   <strong>{{ item.dinamicoKey }}:</strong> {{ item.dinamicoValue }}
                 </div>
+
+                <button type="button" class="btn btn-success" (click)="obtenerCalificacion()">Ver Calificación</button>
+
+
               </div>
             </div>
           </div>

@@ -5,7 +5,7 @@ import { Usuario } from '../auth/class/usuario';
   name: 'nombreApellidoPipe',
 })
 export class NombreApellidoPipe implements PipeTransform {
-  transform(value: Usuario): string {
+  transform(value: any): string {
     if (value.nombre && value.apellido) {
       const nombre = this.capitalizeWords(value.nombre);
       const apellido = this.capitalizeFirstLetter(value.apellido);

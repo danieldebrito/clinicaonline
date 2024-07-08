@@ -1,25 +1,12 @@
 <div class="container">
-    <div class="row">
-        <div class="col-sm-4" *ngFor="let pacienteTurno of mysPacienteTurnos">
-            <div class="card">
-                <div class="card-body">
-                    <app-paciente-card [paciente]="pacienteTurno.paciente"></app-paciente-card>
-                    <div *ngIf="pacienteTurno.turnos!.length > 0">
-                        <h5 class="card-title">Turnos:</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item" *ngFor="let turno of pacienteTurno.turnos">
-                                {{ getFormattedDate(turno) | date:'yyyy-MM-dd HH:mm:ss' }}
-                            </li>
-                        </ul>
-                    </div>
-                    <div *ngIf="pacienteTurno.turnos?.length === 0">
-                        <p>No hay turnos para este paciente.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-3">
-                <button type="button" class="btn btn-success">Ver Historia Clinica</button>
-            </div>
+  <div class="user-list">
+    <div class="user-card" *ngFor="let paciente of pacientesUnicos">
+      <div (click)="verHistoriaClinica(paciente)">
+        <img [src]="paciente.photoURL" alt="{{paciente.apellido}}" class="user-photo">
+        <div class="user-info">
+          <h3 class="user-name">{{paciente | nombreApellidoPipe }}</h3>
         </div>
+      </div>
     </div>
+  </div>
 </div>

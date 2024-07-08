@@ -1,11 +1,31 @@
-<div class="turnos-por-dia-container">
-  <h2>Turnos Médico por Día</h2>
-  <form [formGroup]="dateRangeForm">
+<div class="container mt-4">
+  <h2>Turnos por Médico por Día</h2>
+  <div class="date-range-form">
+    <form [formGroup]="dateRangeForm">
+<div class="row">
+  <div class="col-sm 6">
     <label for="startDate">Fecha de inicio:</label>
-    <input type="date" id="startDate" formControlName="startDate">
-    
+    <div class="mt-2">
+      <input type="date" id="startDate" formControlName="startDate">
+    </div>
+  </div>
+  <div class="col-sm-6">
     <label for="endDate">Fecha de fin:</label>
-    <input type="date" id="endDate" formControlName="endDate">
-  </form>
-  <canvas #turnosPorMedicoChart></canvas>
+    <div class="mt-2">
+      <input type="date" id="endDate" formControlName="endDate">
+    </div>
+  </div>
+</div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="endDate" class="container mt-4">
+  <div class="turnos-por-dia-container">
+    <canvas #turnosPorMedicoChart></canvas>
+  </div>
+  <div class="export-buttons">
+    <button (click)="downloadExcel()">Descargar Excel</button>
+    <button (click)="downloadPDF()">Descargar PDF</button>
+  </div>
 </div>

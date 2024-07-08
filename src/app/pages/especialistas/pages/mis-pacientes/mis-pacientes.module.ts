@@ -7,6 +7,7 @@ import { MisPacientesComponent } from './mis-pacientes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TurnosComponentsModule } from '../../../turnos/components/turnos-components.module';
 import { ComponentsModule } from '../../../pacientes/components/components.module';
+import { PipesModule } from '../../../../pipes/pipes.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ComponentsModule } from '../../../pacientes/components/components.modul
     FormsModule,
     ReactiveFormsModule,
     TurnosComponentsModule,
-    ComponentsModule
+    ComponentsModule,
+    PipesModule
   ]
 })
 export class MisPacientesModule { }

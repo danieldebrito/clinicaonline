@@ -1,9 +1,12 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { Turno } from '../../../../class/turno';
 import { turnosService } from '../../../../services/turnos.service';
 import { EspecialidadesService } from '../../../../services/especialidades.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import * as XLSX from 'xlsx';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-grafico-turno-por-medico',
@@ -11,12 +14,13 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./grafico-turno-por-medico.component.scss'],
 })
 export class GraficoTurnoPorMedicoComponent implements OnInit, AfterViewInit {
-  @Input() turnos: Turno[] = [];
+  turnos: Turno[] = [];
   especialidades: any[] = [];
   cantidadTurnosPorMedico: { [key: string]: any } = {};
   chartData: any = [];
   chartInstance: any = null;
   dateRangeForm: FormGroup;
+  endDate: string | null = null;
 
   @ViewChild('turnosPorMedicoChart') turnosPorMedicoChart!: ElementRef<HTMLCanvasElement>;
 
@@ -35,7 +39,14 @@ export class GraficoTurnoPorMedicoComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.cargarDatos();
+    this.dateRangeForm.valueChanges.subscribe(values => {
+      if (values.startDate && values.endDate) {
+        this.endDate = values.endDate;
+        this.cargarDatos(values.startDate, values.endDate);
+      } else {
+        this.endDate = null;
+      }
+    });
   }
 
   cargarDatos(startDate?: string, endDate?: string): void {
@@ -45,7 +56,7 @@ export class GraficoTurnoPorMedicoComponent implements OnInit, AfterViewInit {
         if (startDate && endDate) {
           this.turnos = this.turnos.filter(turno => {
             if (turno.fechaHora) {
-              const turnoDate = new Date( ( turno.fechaHora.year ?? 0 ), (turno.fechaHora.mes ?? 1) - 1, turno.fechaHora.dia ?? 1);
+              const turnoDate = new Date(turno.fechaHora.year ?? 0, (turno.fechaHora.mes ?? 1) - 1, turno.fechaHora.dia ?? 1);
               return turnoDate >= new Date(startDate) && turnoDate <= new Date(endDate);
             }
             return false;
@@ -191,9 +202,63 @@ export class GraficoTurnoPorMedicoComponent implements OnInit, AfterViewInit {
     return color;
   }
 
-  ngOnInit(): void {
-    this.dateRangeForm.valueChanges.subscribe(values => {
-      this.cargarDatos(values.startDate, values.endDate);
+  ngOnInit(): void {}
+
+  // Method to download chart data as Excel
+  downloadExcel(): void {
+    // Objeto para almacenar la cantidad de turnos por médico y fecha
+    const cantidadTurnosPorMedicoFecha: { [key: string]: number } = {};
+  
+    // Calcular la cantidad de turnos por médico y fecha
+    this.turnos.forEach(turno => {
+      const medico = `${turno.especialista?.nombre} ${turno.especialista?.apellido}`;
+      const fecha = `${turno.fechaHora?.year}-${turno.fechaHora?.mes}-${turno.fechaHora?.dia}`;
+      const key = `${medico} - ${fecha}`;
+  
+      // Incrementar la cantidad de turnos para esta combinación
+      if (cantidadTurnosPorMedicoFecha[key]) {
+        cantidadTurnosPorMedicoFecha[key]++;
+      } else {
+        cantidadTurnosPorMedicoFecha[key] = 1;
+      }
+    });
+  
+    // Convertir los datos agrupados en una hoja de Excel
+    const wsData = Object.keys(cantidadTurnosPorMedicoFecha).map(key => {
+      const [medico, fecha] = key.split(' - ');
+      return {
+        Medico: medico,
+        Fecha: fecha,
+        Cantidad: cantidadTurnosPorMedicoFecha[key] // Asignar la cantidad correctamente
+      };
+    });
+  
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(wsData);
+  
+    // Crear el libro de Excel y escribir la hoja
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'TurnosPorMedico');
+  
+    // Descargar el archivo Excel
+    XLSX.writeFile(wb, 'TurnosPorMedico.xlsx');
+  }
+  
+  
+  
+
+  // Method to export chart as PDF
+  downloadPDF(): void {
+    html2canvas(this.turnosPorMedicoChart.nativeElement).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      
+      // Calculate width and height of the image in the PDF
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save('TurnosPorMedico.pdf');
     });
   }
 }

@@ -5,7 +5,7 @@ import { UsuariosService } from '../../auth/services/usuarios.service';
 import { EEstadoTurno, Turno } from '../../class/turno';
 import { Paciente } from '../../class/usuarios/paciente';
 import { turnosService } from '../../services/turnos.service';
-
+import Swal from 'sweetalert2';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 
@@ -121,6 +121,24 @@ export class HistoriaClinicaComponent implements OnInit {
       }
     });
   }
+
+  obtenerCalificacion() {
+    // Supongamos que obtienes la calificación y el comentario desde algún servicio o directamente
+    const calificacion = 5; // Esto debería ser dinámico en tu aplicación
+    const comentario = "Me atendió muy bien";
+  
+    // Mostrar SweetAlert con la calificación y el comentario
+    Swal.fire({
+      icon: 'info',
+      title: 'Calificación del Turno',
+      html: `
+        <p>Calificación: ${calificacion}</p>
+        <p>Comentario: ${comentario}</p>
+      `,
+      confirmButtonText: 'Cerrar'
+    });
+  }
+  
 
   ngOnInit(): void {
     this.getCurrentUser();
