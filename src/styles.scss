@@ -25,5 +25,50 @@ $color-blancoverde: #d0fff6;
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+//////////////////////  spinner   ////////////////////////////////////////////////////
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-image: url('assets/iso.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+//////////////////////  tooltip   ////////////////////////////////////////////////////
+
+.tooltip {
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 1000;
+}

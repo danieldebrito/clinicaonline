@@ -6,7 +6,7 @@ import { JornadaComponent } from './jornada.component';
 import { EspecialidadesModule } from '../../../especialidades/especialidades.module';
 import { JornadaItemComponent } from './components/jornada-item/jornada-item.component';
 import { EspecialistaComponentsModule } from '../../components/especialista-components.module';
-
+import { DirectivesModule } from '../../../../directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { EspecialistaComponentsModule } from '../../components/especialista-comp
     FormsModule,
     ReactiveFormsModule,
     EspecialidadesModule,
-    EspecialistaComponentsModule
+    EspecialistaComponentsModule,
+    DirectivesModule
   ],
   exports: [
     JornadaComponent

@@ -13,6 +13,7 @@ export class TurnosPorEspecialidadComponent implements OnInit {
   @Input() turnos: Turno[] = [];
   especialidades: any[] = [];
   cantidadTurnosPorEspecialidad: { [especialidad: string]: number } = {};
+  isLoading = true;
 
   constructor(
     private turnoService: turnosService,
@@ -23,7 +24,7 @@ export class TurnosPorEspecialidadComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarDatos();
-  }
+  } 
 
   cargarDatos(): void {
     this.turnoService.getItems().subscribe(
@@ -31,9 +32,14 @@ export class TurnosPorEspecialidadComponent implements OnInit {
         this.turnos = turnos;
         this.especialidadesService.getItems().subscribe(
           (especialidades) => {
-            this.especialidades = especialidades.map(especialidad => especialidad.nombre);
-            this.procesarTurnos();
-            this.generarGrafico();
+            setTimeout(() => {
+              this.isLoading = false;
+              this.especialidades = especialidades.map(
+                (especialidad) => especialidad.nombre
+              );
+              this.procesarTurnos();
+              this.generarGrafico();
+            }, 3000);
           },
           (error) => {
             console.error('Error al obtener especialidades:', error);
@@ -47,12 +53,15 @@ export class TurnosPorEspecialidadComponent implements OnInit {
   }
 
   procesarTurnos(): void {
-    this.cantidadTurnosPorEspecialidad = this.especialidades.reduce((acc, especialidad) => {
-      acc[especialidad] = 0;
-      return acc;
-    }, {});
+    this.cantidadTurnosPorEspecialidad = this.especialidades.reduce(
+      (acc, especialidad) => {
+        acc[especialidad] = 0;
+        return acc;
+      },
+      {}
+    );
 
-    this.turnos.forEach(turno => {
+    this.turnos.forEach((turno) => {
       const especialidad = turno.especialidad?.nombre ?? '';
       if (especialidad) {
         this.cantidadTurnosPorEspecialidad[especialidad]++;
@@ -61,18 +70,22 @@ export class TurnosPorEspecialidadComponent implements OnInit {
   }
 
   generarGrafico(): void {
-    const ctx = document.getElementById('turnosPorEspecialidadChart') as HTMLCanvasElement;
+    const ctx = document.getElementById(
+      'turnosPorEspecialidadChart'
+    ) as HTMLCanvasElement;
     new Chart(ctx, {
       type: 'bar',
       data: {
         labels: this.especialidades,
-        datasets: [{
-          label: 'Cantidad de turnos',
-          data: Object.values(this.cantidadTurnosPorEspecialidad),
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1,
-        }],
+        datasets: [
+          {
+            label: 'Cantidad de turnos',
+            data: Object.values(this.cantidadTurnosPorEspecialidad),
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+          },
+        ],
       },
       options: {
         scales: {

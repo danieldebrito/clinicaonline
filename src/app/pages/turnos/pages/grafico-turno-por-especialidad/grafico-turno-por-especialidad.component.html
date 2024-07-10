@@ -1,5 +1,7 @@
+<div *ngIf="isLoading" class="spinner-container">
+  <div [appSpinner]="isLoading"></div>
+</div>
 <div class="turnos-por-especialidad-container">
-    <h2>Turnos por Especialidad</h2>
-    <canvas id="turnosPorEspecialidadChart"></canvas>
-  </div>
-  
+  <h2>Turnos por Especialidad</h2>
+  <canvas id="turnosPorEspecialidadChart"></canvas>
+</div>

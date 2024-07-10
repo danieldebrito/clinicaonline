@@ -4,6 +4,7 @@ import { GraficoTurnoPorEspecialidadRoutingModule } from './grafico-turno-por-es
 import { TurnosPorEspecialidadComponent } from './grafico-turno-por-especialidad.component';
 import { BaseChartDirective } from 'ng2-charts';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { DirectivesModule } from '../../../../directives/directives.module';
 
 @NgModule({
   providers: [provideCharts(withDefaultRegisterables())],
@@ -13,7 +14,8 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
   imports: [
     CommonModule,
     GraficoTurnoPorEspecialidadRoutingModule,
-    BaseChartDirective 
+    BaseChartDirective,
+    DirectivesModule 
   ]
 })
 export class GraficoTurnoPorEspecialidadModule { }

@@ -5,7 +5,8 @@ import { HoverCardDirective } from './hover-card.directive';
 import { TurnoCanceladoBackGroundDirective } from './turno-cancelado-back-ground.directive';
 
 import { MyCatchaSumaDirective } from './my-captcha-suma.directive';
-import { TurnoAceptadoBackGroundDirective } from './turno-aceptado-back-ground.directive';
+import { SpinnerDirective } from './spinner.directive';
+import { TooltipDirective } from './toltip.directive';
 
 @NgModule({
   declarations: [
@@ -13,17 +14,19 @@ import { TurnoAceptadoBackGroundDirective } from './turno-aceptado-back-ground.d
     HoverCardDirective,
     MyCatchaSumaDirective,
     TurnoCanceladoBackGroundDirective,
-    TurnoAceptadoBackGroundDirective
+    SpinnerDirective,
+    TooltipDirective
   ],
   imports: [
     CommonModule
   ],
   exports: [
     MyCatchaDirective,
-    MyCatchaSumaDirective,
     HoverCardDirective,
+    MyCatchaSumaDirective,
     TurnoCanceladoBackGroundDirective,
-    TurnoAceptadoBackGroundDirective
+    SpinnerDirective,
+    TooltipDirective
   ]
 })
 export class DirectivesModule { }

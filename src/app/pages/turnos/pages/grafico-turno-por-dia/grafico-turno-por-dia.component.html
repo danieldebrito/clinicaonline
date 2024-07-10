@@ -1,3 +1,6 @@
+<div *ngIf="isLoading" class="spinner-container">
+  <div [appSpinner]="isLoading"></div>
+</div>
 <div class="turnos-por-dia-container">
     <h2>Turnos por Día</h2>
     <canvas id="turnosPorDiaChart"></canvas>
