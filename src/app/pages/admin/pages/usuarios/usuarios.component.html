@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of usuarios | paginate: { itemsPerPage: 5, currentPage: p }">
+          <tr *ngFor="let item of usuarios | roleSort | paginate: { itemsPerPage: 5, currentPage: p }">
             <td>
               <div class="image-container">
                 <img src="{{ item.photoURL }}" alt="Imagen redonda con sombra" (click)="bajarHistoriaClinica(item)">
@@ -29,7 +29,7 @@
             </td>
             <td>
               <div class="fs-6">
-                <span class="label label-default">{{ item.nombre }} {{ item.apellido }}</span>
+                <span class="label label-default"> {{ item | tituloMedicoSexo }}  {{ item | nombreApellidoPipe }}</span>
               </div>
             </td>
             <td>

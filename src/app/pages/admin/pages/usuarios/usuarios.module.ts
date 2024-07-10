@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { UsuariosComponent } from './usuarios.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PipesModule } from '../../../../pipes/pipes.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
   imports: [
     CommonModule,
     UsuariosRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    PipesModule
   ]
 })
 export class UsuariosModule { }
